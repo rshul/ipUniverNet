@@ -10,6 +10,13 @@ namespace SRR.UIP.HW2.ConditionsArraysLoops
     {
         static void Main(string[] args)
         {
+            Random randomizer = new Random();
+
+            int newIntValue1 = randomizer.Next(-50, 50);
+
+            Console.WriteLine(newIntValue1);
+            Console.ReadLine();
+
         }
     }
 }
