@@ -365,7 +365,10 @@ namespace SRR.UIP.HW2.ConditionsArraysLoops
                         }
 
                     }
-                    if (numberOfEggs == 2) step++;          //increment of step from 14
+                    if (numberOfEggs == 2)
+                    {
+                        step++;
+                    }                                       //increment of step from 14
                     stepCounter++;                          //keep track number of steps
 
                 }
