@@ -8,6 +8,25 @@ namespace SRR.UIP.HW2.ConditionsArraysLoops
 {
     class Program
     {
+        enum EnumDaysOfWeek
+        {
+            Monday = 1,
+            Tuesday,
+            Wednesday,
+            Thursday,
+            Friday,
+            Saturday,
+            Sunday
+        };
+        enum EnumLengthUnit
+        {
+            mm = 4,
+            cm = 5,
+            dm = 1,
+            m = 3,
+            km = 2
+        };
+
         static void Main(string[] args)
         {
             Random randomizer = new Random();
@@ -17,55 +36,26 @@ namespace SRR.UIP.HW2.ConditionsArraysLoops
             int numberIntC = randomizer.Next(-50, 50);
             Console.WriteLine($"ValueA = {numberIntA} ValueB = {numberIntB} ValueC = {numberIntC}");
 
-            //----Task 1 
+            //----Task 1
 
-            if (numberIntA > 0)
-            {
-                Console.WriteLine($"Number A is positive {numberIntA}");
-            }
-            else
-            {
-                Console.WriteLine($"Number A is negative {numberIntA}");
-            }
+            string outputString = numberIntA > 0 ? "positive" : "not positive";
+            Console.WriteLine($"Number A = {numberIntA} is {outputString} ");
 
             //----Task 2 
 
             bool isOdd = (numberIntA % 2) != 0;
-
-            if (isOdd)
-            {
-                Console.WriteLine($"Number A is odd {numberIntA}");
-            }
-            else
-            {
-                Console.WriteLine($"Number A is even {numberIntA}");
-            }
+            outputString = isOdd ? "odd" : "even";
+            Console.WriteLine($"Number A = {numberIntA} is {outputString} ");
 
             //----Task 3 
 
             bool isExpressionTrue = numberIntA < numberIntB && numberIntB < numberIntC;
-
-            if (isExpressionTrue)
-            {
-                Console.WriteLine($"Expression A < B < C is  {isExpressionTrue}");
-            }
-            else
-            {
-                Console.WriteLine($"Expression A < B < C is {isExpressionTrue}");
-            }
+            Console.WriteLine($"Expression A < B < C is  {isExpressionTrue}");
 
             //----Task 4 
 
             bool isAtLeastOnePositive = (numberIntA > 0) || (numberIntB > 0) || (numberIntC > 0);
-
-            if (isAtLeastOnePositive)
-            {
-                Console.WriteLine($"At least one is positive: {isAtLeastOnePositive}");
-            }
-            else
-            {
-                Console.WriteLine($"At least one is positive: {isAtLeastOnePositive}");
-            }
+            Console.WriteLine($"At least one is positive: {isAtLeastOnePositive}");
 
             //----Task 5
 
@@ -76,112 +66,73 @@ namespace SRR.UIP.HW2.ConditionsArraysLoops
             bool isOnlyPositiveB = !isPositiveA && isPositiveB && !isPositiveC;
             bool isOnlyPositiveC = !isPositiveA && !isPositiveB && isPositiveC;
             bool isOnlyOnePositive = isOnlyPositiveA || isOnlyPositiveB || isOnlyPositiveC;
-
-            if (isOnlyOnePositive)
-            {
-                Console.WriteLine($"Only one is positive: {isOnlyOnePositive}");
-            }
-            else
-            {
-                Console.WriteLine($"Only one is positve: {isOnlyOnePositive}");
-            }
+            Console.WriteLine($"Only one is positive: {isOnlyOnePositive}");
 
             //----Task 6
 
             int posNumberInt = randomizer.Next(1, 10000);
             bool isThreeDigits = posNumberInt > 99 && posNumberInt < 1000;
             bool isOddPosNumberInt = posNumberInt % 2 != 0;
-
-            if (isThreeDigits && isOddPosNumberInt)
-            {
-                Console.WriteLine($" OK ({isThreeDigits && isOddPosNumberInt}). The number {posNumberInt} has 3 digits - {isThreeDigits} and odd - {isOddPosNumberInt}");
-            }
-            else
-            {
-                Console.WriteLine($"The number {posNumberInt} has 3 digits - {isThreeDigits} and odd - {isOddPosNumberInt}");
-            }
+            outputString = isThreeDigits && isOddPosNumberInt ? "Three digit number is odd" : "Number hasn't 3 digit or even";
+            Console.WriteLine(outputString);
 
             //----Task 7
 
             // initializing coordinates of point and verteces of rectangle
-            int numX = randomizer.Next(1, 50), numY = randomizer.Next(1, 50);
-            int vertexX1 = randomizer.Next(1, 50), vertexY1 = randomizer.Next(1, 50);
-            int vertexX2 = randomizer.Next(vertexX1 + 1, 51), vertexY2 = randomizer.Next(0, vertexY1 - 1);
+            int numX = randomizer.Next(1, 50);
+            int numY = randomizer.Next(1, 50);
+            int vertexX1 = randomizer.Next(1, 50);
+            int vertexY1 = randomizer.Next(1, 50);
+            int vertexX2 = randomizer.Next(vertexX1 + 1, 51);
+            int vertexY2 = randomizer.Next(0, vertexY1 - 1);
 
             bool isInsideRectangle = numX > vertexX1 && numX < vertexX2 && numY > vertexY2 && numY < vertexY1;
-            if (isInsideRectangle)
-            {
-                Console.WriteLine($"Inside Rectangle: x,y = {numX},{numY}; x1,y1 = {vertexX1},{vertexY1}; x2,y2 = {vertexY1},{vertexY2}");
-            }
-            else
-            {
-                Console.WriteLine($"x,y = {numX},{numY}; x1,y1 = {vertexX1},{vertexY1}; x2,y2 = {vertexY1},{vertexY2}");
-            }
+            outputString = isInsideRectangle ? "Inside recatangle" : "Outside rectangle";
+            Console.WriteLine($"{outputString}: x,y = {numX},{numY}; x1,y1 = {vertexX1},{vertexY1}; x2,y2 = {vertexY1},{vertexY2}");
 
             //----Task 8
 
-            int rectangleSideA = randomizer.Next(1, 30),
-                rectangleSideB = randomizer.Next(1, 30),
-                rectangleSideC = randomizer.Next(1, 30);
+            int rectangleSideA = randomizer.Next(1, 30);
+            int rectangleSideB = randomizer.Next(1, 30);
+            int rectangleSideC = randomizer.Next(1, 30);
             bool isSumABGreaterC = rectangleSideA + rectangleSideB > rectangleSideC;
             bool isSumACGreaterB = rectangleSideA + rectangleSideC > rectangleSideB;
             bool isSumBCGreaterA = rectangleSideB + rectangleSideC > rectangleSideA;
             bool isTriangleExists = isSumBCGreaterA && isSumACGreaterB && isSumABGreaterC;
-
-            if (isTriangleExists)
-            {
-                Console.WriteLine($"Triangle exitsts: {isTriangleExists}; a={rectangleSideA}, b={rectangleSideB}, c={rectangleSideC}");
-            }
-            else
-            {
-                Console.WriteLine($"Triangle doesn't exitst: {isTriangleExists}; a={rectangleSideA}, b={rectangleSideB}, c={rectangleSideC}");
-            }
+            outputString = isTriangleExists ? "Triangle exists" : "Triangle doesn't exist";
+            Console.WriteLine($"{outputString}: {isTriangleExists}; a={rectangleSideA}, b={rectangleSideB}, c={rectangleSideC}");
 
             //----Task 9
 
-            int coordX = randomizer.Next(1, 9),
-                coordY = randomizer.Next(1, 9);
+            int coordX = randomizer.Next(1, 9);
+            int coordY = randomizer.Next(1, 9);
             bool isWhite = (coordX + coordY) % 2 != 0;
-
-            if (isWhite)
-            {
-                Console.WriteLine($"Field is white: {coordX},{coordY}");
-            }
-            else
-            {
-                Console.WriteLine($"Field is black: {coordX},{coordY}");
-            }
+            outputString = isWhite ? "white" : "black";
+            Console.WriteLine($"Field is {outputString}: {coordX},{coordY}");
 
             //----Task 10
 
-            int firstFieldX = randomizer.Next(1, 9),
-                firstFieldY = randomizer.Next(1, 9),
-                secondFieldX = randomizer.Next(1, 9),
-                secondFieldY = randomizer.Next(1, 9);
+            int startFieldX = randomizer.Next(1, 9);
+            int startFieldY = randomizer.Next(1, 9);
+            int targetFieldX = randomizer.Next(1, 9);
+            int targetFieldY = randomizer.Next(1, 9);
 
-            while (firstFieldX == secondFieldX && secondFieldX == secondFieldY)
+            while (startFieldX == targetFieldX && targetFieldX == targetFieldY)
             {
-                secondFieldX = randomizer.Next(1, 9);
-                secondFieldY = randomizer.Next(1, 9);
+                targetFieldX = randomizer.Next(1, 9);
+                targetFieldY = randomizer.Next(1, 9);
             }
 
-            bool isMoveStrait = firstFieldX == secondFieldX || firstFieldY == secondFieldY;
-            bool isMoveDiagonal = Math.Abs(firstFieldX - secondFieldX) == Math.Abs(firstFieldY - secondFieldY);
-            bool isOneMove = isMoveStrait || isMoveDiagonal;
-
-            if (isOneMove)
-            {
-                Console.WriteLine($"It's possible to make one move: x1,y1 = {firstFieldX},{firstFieldY}; x2,y2 = {secondFieldX},{secondFieldY}");
-            }
-            else
-            {
-                Console.WriteLine($"Queen can't make only one move: x1,y1 = {firstFieldX},{firstFieldY}; x2,y2 = {secondFieldX},{secondFieldY}");
-            }
+            bool isMoveStrait = startFieldX == targetFieldX || startFieldY == targetFieldY;
+            bool isMoveDiagonal = Math.Abs(startFieldX - targetFieldX) == Math.Abs(startFieldY - targetFieldY);
+            bool isOneMoveFromStartToTarget = isMoveStrait || isMoveDiagonal;
+            outputString = isOneMoveFromStartToTarget ? "It's possible to make one move from start to target" : "Queen can't get target by one move";
+            Console.WriteLine($"{outputString}: x1,y1 = {startFieldX},{startFieldY}; x2,y2 = {targetFieldX},{targetFieldY}");
 
             //----Task 11
 
-            int numA = randomizer.Next(1, 11),
-                numB = randomizer.Next(1, 11);
+            int numA = randomizer.Next(1, 11);
+            int numB = randomizer.Next(1, 11);
 
             Console.WriteLine($"Before: Number A = {numA}, number B = {numB}");
             numA = numA + numB;
@@ -191,62 +142,100 @@ namespace SRR.UIP.HW2.ConditionsArraysLoops
 
             //----Task 12
 
-            string[] daysWeek = new string[7]
-            {
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-                "Sunday"
-            };
-
             int numberOfDay = randomizer.Next(1, 8);
-            Console.WriteLine($"The day of Week is {daysWeek[numberOfDay - 1]}");
+            outputString = "";
+            switch ((EnumDaysOfWeek) numberOfDay)
+            {
+                case EnumDaysOfWeek.Monday:
+                    outputString = "Monday";
+                    break;
+                case EnumDaysOfWeek.Tuesday:
+                    outputString = "Tuesday";
+                    break;
+                case EnumDaysOfWeek.Wednesday:
+                    outputString = "Wednesday";
+                    break;
+                case EnumDaysOfWeek.Thursday:
+                    outputString = "Thursday";
+                    break;
+                case EnumDaysOfWeek.Friday:
+                    outputString = "Friday";
+                    break;
+                case EnumDaysOfWeek.Saturday:
+                    outputString = "Saturday";
+                    break;
+                case EnumDaysOfWeek.Sunday:
+                    outputString = "Sunday";
+                    break;
+                default:
+                    outputString = "Error!";
+                    break;
+
+            }
+            Console.WriteLine($"The day of Week is {outputString} ");
 
             //----Task 13
 
             int numberK = randomizer.Next(1, 10);
-            string[] markDescription = new string[4]
+            outputString = "";
+            switch (numberK)
             {
-                "Bad",
-                "Good",
-                "Very good",
-                "Exellent"
-            };
-
-            if (numberK == 1 || numberK == 2)
-            {
-                Console.WriteLine($"The mark {numberK} is {markDescription[0]}");
+                case 1:
+                case 2:
+                    outputString = "Bad";
+                    break;
+                case 3:
+                    outputString = "Good";
+                    break;
+                case 4:
+                    outputString = "Very Good";
+                    break;
+                case 5:
+                    outputString = "Excellent";
+                    break;
+                default:
+                    outputString = "Mark is out of range";
+                    break;
             }
-            else if (numberK < 6)
-            {
-                Console.WriteLine($"The mark {numberK} is {markDescription[numberK - 2]}");
-            }
-            else
-            {
-                Console.WriteLine($"Error! Mark {numberK} is out of range.");
-            }
+            Console.WriteLine($"The mark is {outputString}");
 
             //----Task 14
 
             int lengthUnit = randomizer.Next(1, 6);
-
-            double minRandomDouble = 0.0,
-                maxRandomDouble = 10.0,
-                randomDouble = minRandomDouble + randomizer.NextDouble() * (maxRandomDouble - minRandomDouble);
-            double[] convertNumber = new double[5]
+            double minRandomDouble = 0.0;
+            double maxRandomDouble = 10.0;
+            double randomDouble = minRandomDouble + randomizer.NextDouble() * (maxRandomDouble - minRandomDouble);
+            double lengthInMeters;
+            outputString = "";
+            switch ((EnumLengthUnit) lengthUnit)
             {
-                0.1,
-                1000,
-                1.0,
-                0.001,
-                0.01
-            };
-            double lengthInMeters = randomDouble * convertNumber[lengthUnit - 1];
+                case EnumLengthUnit.mm:
+                    outputString = "mm";
+                    lengthInMeters = randomDouble / 1000;
+                    break;
+                case EnumLengthUnit.cm:
+                    outputString = "cm";
+                    lengthInMeters = randomDouble / 100;
+                    break;
+                case EnumLengthUnit.dm:
+                    outputString = "dm";
+                    lengthInMeters = randomDouble / 10;
+                    break;
+                case EnumLengthUnit.m:
+                    outputString = "m";
+                    lengthInMeters = randomDouble;
+                    break;
+                case EnumLengthUnit.km:
+                    outputString = "km";
+                    lengthInMeters = randomDouble * 1000;
+                    break;
+                default:
+                    outputString = "error";
+                    lengthInMeters = 0.0;
+                    break;
+            }
 
-            Console.WriteLine($"The length is {lengthInMeters:f6} m. Initial unit is {lengthUnit} and value is {randomDouble:f6}");
+            Console.WriteLine($"The length is {lengthInMeters:f6} m. Initial unit is {randomDouble:f6} {outputString} and unit number is {lengthUnit}");
 
             //----Task 15
 
@@ -306,12 +295,12 @@ namespace SRR.UIP.HW2.ConditionsArraysLoops
             int[] firstArray = new int[firstArrayCount];
             int[] secondArray = new int[secondArrayCount];
 
-            for(int i = 0; i<firstArray.Length; i++)
+            for (int i = 0; i < firstArray.Length; i++)
             {
                 firstArray[i] = randomizer.Next(-20, 21);
             }
 
-            for(int i = 0; i < secondArray.Length; i++)
+            for (int i = 0; i < secondArray.Length; i++)
             {
                 secondArray[i] = randomizer.Next(-20, 21);
             }
@@ -321,32 +310,32 @@ namespace SRR.UIP.HW2.ConditionsArraysLoops
             int lengthArrayDifference = firstArrayCount - secondArrayCount;
             for (int i = 0; i < resultArrayCount; i++)
             {
-                if (i < resultArrayCount - Math.Abs(lengthArrayDifference ))
+                if (i < resultArrayCount - Math.Abs(lengthArrayDifference))
                 {
                     resultArray[i] = firstArray[i] > secondArray[i] ? firstArray[i] : secondArray[i];
                 }
                 else
                 {
-                    resultArray[i] = lengthArrayDifference > 0  ? firstArray[i] : secondArray[i];
+                    resultArray[i] = lengthArrayDifference > 0 ? firstArray[i] : secondArray[i];
                 }
             }
 
-            for(int i = 0; i<firstArrayCount; i++)
+            for (int i = 0; i < firstArrayCount; i++)
             {
                 Console.Write($"{firstArray[i],4}");
-                
+
             }
             Console.WriteLine();
             for (int i = 0; i < secondArrayCount; i++)
             {
                 Console.Write($"{secondArray[i],4}");
-               
+
             }
             Console.WriteLine();
             for (int i = 0; i < resultArrayCount; i++)
             {
                 Console.Write($"{resultArray[i],4}");
-               
+
             }
             Console.WriteLine();
 
@@ -354,7 +343,7 @@ namespace SRR.UIP.HW2.ConditionsArraysLoops
             int minStep = 0,
                 sumSteps = 0,
                 averageSteps = 0;
-            for(int i = 1; i < 100; i++)
+            for (int i = 1; i < 100; i++)
             {
                 int floorOfBrokenEgg = i;
                 int numberOfEggs = 2;
@@ -382,7 +371,7 @@ namespace SRR.UIP.HW2.ConditionsArraysLoops
                 }
                 if (i == 1)
                 {
-                    minStep = stepCounter; 
+                    minStep = stepCounter;
                 }
                 else
                 {
