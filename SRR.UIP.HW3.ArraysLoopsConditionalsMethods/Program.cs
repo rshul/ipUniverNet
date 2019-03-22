@@ -106,7 +106,7 @@ namespace SRR.UIP.HW3.ArraysLoopsConditionalsMethods
             //вычислять это произведение с помощью вещественной переменной и вывести его как вещественное число. Использовать рекурсию.
             int task9NumberN = randomizer.Next(1, 50);
             double factorialOfNumber = Factorial(task9NumberN);
-            Console.WriteLine($"Factorial of {task9NumberN} is {factorialOfNumber}");
+            Console.WriteLine($"Factorial of {task9NumberN} is {factorialOfNumber:f0}");
 
             //--10--Написать метод, который считает и выводит на консоль последовательность
             //Фибоначчи (число элементов в последовательности принимается, как входящий параметр), используя рекурсию.
@@ -199,7 +199,7 @@ namespace SRR.UIP.HW3.ArraysLoopsConditionalsMethods
             //--18--Создать метод, проверяющий, может ли массив быть "сбалансированным", т.е. разделённым на две части в каком-то месте,
             //таким образом, чтобы сумма элементов одной части равнялась сумме элементов второй.
             int[] task18RandomArray = MakeRandomArray(randomizer, 10, 4, 10);
-            bool isArrayBalanced = CheckIfArrayBalanced(task18RandomArray);
+            bool isArrayBalanced = IsArrayBalanced(task18RandomArray);
             PrintArray(task18RandomArray);
             Console.WriteLine($"Array is balanced: {isArrayBalanced}");
 
@@ -215,7 +215,7 @@ namespace SRR.UIP.HW3.ArraysLoopsConditionalsMethods
             Console.ReadLine();
         }
 
-        private static bool CheckIfArrayBalanced(int[] takenArray)
+        private static bool IsArrayBalanced(int[] takenArray)
         {
             bool isBalanced = false;
             int currentSum = 0;
@@ -291,32 +291,30 @@ namespace SRR.UIP.HW3.ArraysLoopsConditionalsMethods
 
         private static int[,] GenerateMultTableExamples(int numberOfExamples, Random randomizer)
         {
-            int[,] tableOfBusyElements = new int[8, 8];                                         // for checking duplicates 
-            for (int i = 0; i < 8; i++)                                                         // 0 - free, 1 - busy
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    tableOfBusyElements[i, j] = 0;
-                }
-            }
+            
             int[,] generatedExamplesOfMultTable = new int[numberOfExamples, 2];                 // examples placed in array n x 2
             int firstNumber = 0;
             int secondNumber = 0;
             for (int i = 0; i < numberOfExamples; i++)
             {
-                firstNumber = randomizer.Next(2, 10);
-                secondNumber = randomizer.Next(2, 10);
-                bool isBusyExample = tableOfBusyElements[firstNumber - 2, secondNumber - 2] == 1;   // check duplicates
+                bool isBusyExample = true;   // check duplicates
                 while (isBusyExample)                                                               // preventing duplicates
                 {
                     firstNumber = randomizer.Next(2, 10);
-                    secondNumber = randomizer.Next(2, 10);
-                    isBusyExample = tableOfBusyElements[firstNumber - 2, secondNumber - 2] == 1;
+                    secondNumber = randomizer.Next(2, firstNumber + 1);
+                    isBusyExample = false;
+                    for (int j = i - 1; j > -1; j--)
+                    {
+                        if(generatedExamplesOfMultTable[j,0] == firstNumber && generatedExamplesOfMultTable[j,1] == secondNumber)
+                        {
+                            isBusyExample = true;
+                            break;
+                        }
+                    }
                 }
                 generatedExamplesOfMultTable[i, 0] = firstNumber;
                 generatedExamplesOfMultTable[i, 1] = secondNumber;
-                tableOfBusyElements[firstNumber - 2, secondNumber - 2] = 1;                         // +2 is offset from array index
-                tableOfBusyElements[secondNumber - 2, firstNumber - 2] = 1;
+                
             }
             return generatedExamplesOfMultTable;
         }
@@ -392,8 +390,8 @@ namespace SRR.UIP.HW3.ArraysLoopsConditionalsMethods
 
         private static int GetNumberOfDayInMonth(int year, int monthNumber)
         {
-            int leapYear = 1900;
-            bool isLeapYear = Math.Abs(year - leapYear) % 4 == 0;
+            bool isNotHundredthYear = (year % 4 == 0 && year % 100 != 0);
+            bool isLeapYear = isNotHundredthYear || year % 400 == 0;          // which is close enough to compensate fraction of 365.242375
             int[] daysInMonth = new int[12]
             {
                 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
@@ -413,7 +411,7 @@ namespace SRR.UIP.HW3.ArraysLoopsConditionalsMethods
 
         private static double Factorial(int numberN)
         {
-            if (numberN < 1)
+            if (numberN <= 1)
             {
                 return 1;
             }
@@ -445,13 +443,11 @@ namespace SRR.UIP.HW3.ArraysLoopsConditionalsMethods
         }
 
         private static void PrintArray(int[] sampleArray)
-        {
-            int indexOfArray = 0;
+        { 
             Console.Write("[");
             foreach (int arrayItem in sampleArray)
             {
                 Console.Write($"{arrayItem,4}");
-                indexOfArray++;
             }
             Console.Write("  ]\n");
         }
