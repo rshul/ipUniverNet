@@ -19,16 +19,14 @@ namespace SRR.UIP.HW4.OOP.Classes.Task2
                     Console.WriteLine("Task is not assigned!");
                     return true;
                 }
-                bool isEveryDeviceFinished = true;
                 foreach (var device in this.ProducingDevices)
                 {
                     if (!device.IsCompleted)
                     {
-                        isEveryDeviceFinished = false;
-                        break;
+                        return false;
                     }
                 }
-                return isEveryDeviceFinished;
+                return true;
             }
         }
         public int CurrentDevice
@@ -147,26 +145,20 @@ namespace SRR.UIP.HW4.OOP.Classes.Task2
         }
         public void WorkOneShift()
         {
-            if (this.WorkersTeam != null && this.ProducingDevices != null)
+            if (this.WorkersTeam == null || this.ProducingDevices == null)
             {
-                int nextDevice = this.CurrentDevice;
-                foreach (var worker in this.WorkersTeam)
-                {
-                    if (this.IsJobDone)
-                    {
-                        break;
-                    }
+                return;
+            }
 
-                    worker.AttachDetail(this.ProducingDevices[nextDevice]);
-
-                    if (this.ProducingDevices[nextDevice].IsCompleted && this.ProducingDevices.Length - 1 > nextDevice)
-                    {
-                        nextDevice++;
-                    }
-
-                }
-
+            foreach (var worker in this.WorkersTeam)
+            {
+                worker.AttachDetailToDevice(GetNotCompletedDevice());
             }
         }
-    }
+        private Device GetNotCompletedDevice()
+        {
+            return this.ProducingDevices[this.CurrentDevice];
+        }
+
+    }   
 }

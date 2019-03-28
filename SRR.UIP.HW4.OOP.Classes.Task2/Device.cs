@@ -24,15 +24,15 @@ namespace SRR.UIP.HW4.OOP.Classes.Task2
         {
             get
             {
-                int detailsCount = 0;
+                bool isCompleted = true;
                 foreach (var detail in AttachedDetails)
                 {
-                    if (detail == "+")
+                    if (detail == "-")
                     {
-                        detailsCount++;
+                        isCompleted = false;
                     }
                 }
-                return detailsCount == AttachedDetails.Length;
+                return isCompleted;
             }
         }
 

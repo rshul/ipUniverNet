@@ -32,7 +32,6 @@ namespace SRR.UIP.HW4.OOP.Classes.Task3
                     case 0:
                         Console.WriteLine("Quiting!");
                         return;
-                        break;
                     case 1:
                         AddStoreToShop(currentPhoneShop);
                         break;
@@ -92,7 +91,7 @@ namespace SRR.UIP.HW4.OOP.Classes.Task3
             }
         }
 
-        private static int GetPhonePrice(int minValue, int maxValue, string message = "")
+        private static int GetPhonePrice(int minValue, int maxValue, string message = "Wrong input. Try again")
         {
             int phonePrice;
             bool isInRange;
@@ -121,7 +120,7 @@ namespace SRR.UIP.HW4.OOP.Classes.Task3
             Console.WriteLine($"=> Store '{shopAddress}' and capacity '{capacityOfStore}' successfully created");
         }
 
-        private static string GetShopAddress(int minStringLength, string message = "")
+        private static string GetShopAddress(int minStringLength, string message = "Wrong input. Try again")
         {
             string shopAddress;
             bool isLessThanMinLength;
@@ -136,7 +135,7 @@ namespace SRR.UIP.HW4.OOP.Classes.Task3
             } while (isLessThanMinLength);
             return shopAddress;
         }
-        private static string GetPhoneModel(int minStringLength, string message = "")
+        private static string GetPhoneModel(int minStringLength, string message = "Wrong input. Try again")
         {
             string phoneModel;
             bool isLessThanMinLength;
@@ -151,7 +150,7 @@ namespace SRR.UIP.HW4.OOP.Classes.Task3
             } while (isLessThanMinLength);
             return phoneModel;
         }
-        private static int GetCapacityOfStore(int minValue, int maxValue, string message = "")
+        private static int GetCapacityOfStore(int minValue, int maxValue, string message = "Wrong input. Try again")
         {
             int capacityOfStore;
             bool isInRange;
@@ -166,7 +165,7 @@ namespace SRR.UIP.HW4.OOP.Classes.Task3
             } while (!isInRange);
             return capacityOfStore;
         }
-        private static string GetNotEmptyString(string message = "")
+        private static string GetNotEmptyString(string message = "Wrong input. Try again")
         {
             string inputString;
             bool isEmpty;
@@ -200,7 +199,7 @@ namespace SRR.UIP.HW4.OOP.Classes.Task3
             } while (madeChoice < 0 || madeChoice > maxValue);
             return madeChoice;
         }
-        private static int GetNumberFromInput(string message = "")
+        private static int GetNumberFromInput(string message = "Wrong input. Try again")
         {
             string inputLine;
             int numberFromInput;

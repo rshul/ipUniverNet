@@ -13,17 +13,27 @@ namespace SRR.UIP.HW4.OOP.Classes.Task2
         public Worker() : this("newbie") {}
         public Worker(string qualification)
         {
-            if (String.IsNullOrEmpty(qualification) || !(qualification.Equals("master") || qualification.Equals("profi") || qualification.Equals("newbie")))
+            string[] qualificationNames = new string[3]
             {
-                this.Qualification = "newbie";
-            }
-            else
+                "newbie",
+                "profi",
+                "master"
+            };
+            if (!String.IsNullOrEmpty(qualification))
             {
-                this.Qualification = qualification;
+                foreach (var qualificationName in qualificationNames)
+                {
+                    if (qualification.Equals(qualificationName))
+                    {
+                        this.Qualification = qualification;
+                        return;
+                    }
+                }  
             }
+            this.Qualification = "newbie";
             
         }
-        public void AttachDetail(Device handledDevice)
+        public void AttachDetailToDevice(Device handledDevice)
         {
             if (handledDevice.IsCompleted)
             {
