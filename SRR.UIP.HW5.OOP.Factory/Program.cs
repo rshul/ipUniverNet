@@ -11,8 +11,8 @@ namespace SRR.UIP.HW5.OOP.Factory
         static void Main(string[] args)
         {
             Country ukraine = new Country("UA");
-            Plant aggregateFactory = new Plant(ukraine);
-            aggregateFactory.StartMonth();
+            Plant aggregateFactory = new Plant(ukraine,"Best Agragates Ltd");
+            aggregateFactory.StartYear();
 
             Console.ReadLine();
         }

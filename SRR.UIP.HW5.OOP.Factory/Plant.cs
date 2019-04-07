@@ -8,12 +8,16 @@ namespace SRR.UIP.HW5.OOP.Factory
 {
     class Plant
     {
+        public string PlantName { get; private set; }
         public List<Worker> Workers { get; set; }
         public List<Order> Orders { get; set; }
         public Country PlantCountry { get; private set; }
 
-        public Plant(Country plantCountry)
+        public Plant(Country plantCountry) : this(plantCountry, "NoNamePlant") { }
+        
+        public Plant(Country plantCountry, string name)
         {
+            this.PlantName = name;
             this.PlantCountry = plantCountry;
             this.Orders = this.PlantCountry.GenerateNewOrders(7);
             this.Workers = this.PlantCountry.HireWorkers(10);
@@ -49,11 +53,11 @@ namespace SRR.UIP.HW5.OOP.Factory
                 Car currentCar = GetNotCompletedCar(currentOrder);
                 if (currentCar != null)
                 {
-                    int workingCapacity = worker.Productivity - worker.WorkCounter;
+                    int workingCapacity = worker.Productivity - worker.UsedWorkingUnits;
                     for (int i = 0; i < workingCapacity; i++)
                     {
                         worker.DoWork(currentCar);
-                        Logger.LogInfo($"do work on {currentCar.Name} {currentCar.StateOfReadinessCount}");
+                        Logger.LogInfo($"do work on {currentCar.Name} {currentCar.AttachedDetailsCount}");
                         if (currentCar.IsCompleted)
                         {
                             Logger.LogInfo($"Car {currentCar.Name} is completed. Total Costs: {currentCar.GeneralProductionCosts}");
@@ -61,13 +65,13 @@ namespace SRR.UIP.HW5.OOP.Factory
                         }
                     }
                 }
-                else
+                else if(currentTank != null)
                 {
-                    int workingCapacity = worker.Productivity - worker.WorkCounter;
+                    int workingCapacity = worker.Productivity - worker.UsedWorkingUnits;
                     for (int i = 0; i < workingCapacity; i++)
                     {
                         worker.DoWork(currentTank);
-                        Logger.LogInfo($"do work on {currentTank.Name} {currentTank.StateOfReadinessCount}");
+                        Logger.LogInfo($"do work on {currentTank.Name} {currentTank.AttachedDetailsCount}");
                         if (currentTank.IsCompleted)
                         {
                             Logger.LogInfo($"Tank {currentTank.Name} is completed. Total Costs: {currentTank.GeneralProductionCosts}");
@@ -116,8 +120,8 @@ namespace SRR.UIP.HW5.OOP.Factory
             Order currentOrder = SearchNotCompletedOrder();
             if (currentOrder == null)
             {
-                Logger.LogInfo("Got new orders");
                 this.Orders.AddRange(this.PlantCountry.GenerateNewOrders(7));
+                Logger.LogInfo("Got new orders");
                 currentOrder = SearchNotCompletedOrder();
             }
             return currentOrder;

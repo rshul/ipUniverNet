@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRR.UIP.HW5.OOP.Factory
 {
-    class Logger
+   internal class Logger
     {
         public static int LogInfoCounter { get; private set; }
         public static int LogWarningCounter { get; private set; }
@@ -17,12 +17,12 @@ namespace SRR.UIP.HW5.OOP.Factory
             LogWarningCounter = 0;
         }
        public static void LogInfo(string message)
-        {
-            Console.WriteLine($"{LogInfoCounter++} Info {DateTime.Now.ToString()} {message}");
+        {         
+            Console.WriteLine($"{LogInfoCounter++,10:D} Info\t{DateTime.Now.ToString("dd.MM.yyyy HH:mm:fff")} {message}");
         }
        public static void LogWarning(string message)
         {
-            Console.WriteLine($"{LogWarningCounter++} Warning {DateTime.Now.ToString()} {message}");
+            Console.WriteLine($"{LogWarningCounter++,10:D} Warning\t{DateTime.Now.ToString("dd.MM.yyyy HH:mm:fff")} {message}");
         }
     }
 }

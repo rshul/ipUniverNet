@@ -29,14 +29,14 @@ namespace SRR.UIP.HW5.OOP.Factory
                 
             }
         }
-        public int WorkCounter { get; private set; }
+        public int UsedWorkingUnits { get; private set; }
 
         public Worker(string name, string qualification, int salary)
         {
             this.Name = name;
             this.Salary = salary;
             InitializeQualification(qualification);
-            this.WorkCounter = 0;
+            this.UsedWorkingUnits = 0;
         }
         public void DoWork(Car takenCar)
         {
@@ -53,6 +53,11 @@ namespace SRR.UIP.HW5.OOP.Factory
         }
         private void InitializeQualification(string qualification)
         {
+            if (string.IsNullOrWhiteSpace(qualification))
+            {
+                this.Qualification = "newbie";
+                return;
+            }
             string[] qualificationUsed = new string[]
             {
                 "newbie",
@@ -60,11 +65,6 @@ namespace SRR.UIP.HW5.OOP.Factory
                 "master"
             };
 
-            if (qualification == null)
-            {
-                this.Qualification = "newbie";
-                return;
-            }
             foreach (var qualificationItem in qualificationUsed)
             {
                 if (qualification.Equals(qualificationItem))
@@ -78,7 +78,9 @@ namespace SRR.UIP.HW5.OOP.Factory
 
         private void GetTired()
         {
-            this.WorkCounter = (this.WorkCounter + 1) % this.Productivity;
+            int incrementedUsedWorkingUnits = this.UsedWorkingUnits + 1;
+            int usedWorkingUnitsToFullPerformance = incrementedUsedWorkingUnits % this.Productivity;
+            this.UsedWorkingUnits = usedWorkingUnitsToFullPerformance;
         }
 
 

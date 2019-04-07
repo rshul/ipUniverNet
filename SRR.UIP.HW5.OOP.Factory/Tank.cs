@@ -10,12 +10,12 @@ namespace SRR.UIP.HW5.OOP.Factory
     {
         public string Name { get; private set; }
         public int WorkingCost { get; private set; }
-        public int StateOfReadinessCount { get; private set; }
+        public int AttachedDetailsCount { get; private set; }
         public bool IsCompleted
         {
             get
             {
-                return StateOfReadinessCount == WorkingCost;
+                return AttachedDetailsCount == WorkingCost;
             }
         }
         public int GeneralProductionCosts { get; private set; }
@@ -26,7 +26,7 @@ namespace SRR.UIP.HW5.OOP.Factory
 
         public Tank(string name, int workingCost)
         {
-            this.StateOfReadinessCount = 0;
+            this.AttachedDetailsCount = 0;
             this.Name = name;
             this.WorkingCost = workingCost;
             this.GeneralProductionCosts = 0;
@@ -36,7 +36,7 @@ namespace SRR.UIP.HW5.OOP.Factory
         {
             if (!this.IsCompleted)
             {
-                StateOfReadinessCount++;
+                AttachedDetailsCount++;
             }
         }
 
