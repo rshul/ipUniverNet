@@ -15,9 +15,6 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
             this.Name = name;
             this.PowerConsumption = powerConsumption;
         }
-        public virtual string GetDescription()
-        {
-            return $"Device {this.Name}, power consumption {this.PowerConsumption}";
-        }
+        
     }
 }

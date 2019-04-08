@@ -15,9 +15,10 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
             this.Resolution = resolution;
         }
 
-        public override string GetDescription()
+        public override string ToString()
         {
-            return base.GetDescription() + $", screen diagonal {this.ScreenDiagonal}, resolution {this.Resolution}";
+            return $"Plasma TV: name {this.Name}, power consumption {this.PowerConsumption}, " +
+                $"screen diagonal {this.ScreenDiagonal}, resolution {this.Resolution}. Type: {this.GetType()}";
         }
     }
 }

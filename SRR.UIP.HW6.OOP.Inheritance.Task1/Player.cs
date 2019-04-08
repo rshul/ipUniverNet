@@ -13,14 +13,15 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
         {
             this.PlaybackFormats = playbackFormats;
         }
-        public override string GetDescription()
+
+        public override string ToString()
         {
             string pbFormats = "";
             foreach (var pbFormat in this.PlaybackFormats)
             {
                 pbFormats += pbFormat + " ";
             }
-            return base.GetDescription() + ", "+ pbFormats;
+            return $"Player {this.Name}, power consumtion {this.PowerConsumption}, playback formats {pbFormats}. Type: {this.GetType()}";
         }
     }
 }

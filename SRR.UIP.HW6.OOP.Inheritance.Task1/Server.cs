@@ -14,9 +14,9 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
             this.CpuNumber = cpuNumber;
         }
 
-        public override string GetDescription()
+        public override string ToString()
         {
-            return base.GetDescription() + $", RAM {this.Ram}, {this.CpuNumber}";
+            return $"Server {this.Name}, power consumption {this.PowerConsumption}, RAM {this.Ram}, cpu number {this.CpuNumber}. Type: {this.GetType()}";
         }
     }
 }

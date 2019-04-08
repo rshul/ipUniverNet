@@ -14,9 +14,9 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
             this.Weight = weight;
         }
 
-        public override string GetDescription()
+        public override string ToString()
         {
-            return base.GetDescription() + $", RAM {this.Ram}, {this.Weight}";
+            return $"Laptop {this.Name}, power consumption {this.PowerConsumption}, RAM {this.Ram}, weight {this.Weight}. Type: {this.GetType()}";
         }
     }
 }

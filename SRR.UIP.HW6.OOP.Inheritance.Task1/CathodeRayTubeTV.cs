@@ -15,9 +15,10 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
             this.ScreenFPS = screenFPS;
         }
 
-        public override string GetDescription()
+        public override string ToString()
         {
-            return base.GetDescription() + $", screen diagonal{this.ScreenDiagonal}, screen FPS {this.ScreenFPS}";
+            return $"Cathode ray tube TV:  {this.Name}, power consumption {this.PowerConsumption}, " +
+                $"screen diagonal {this.ScreenDiagonal}, screen FPS {this.ScreenFPS}. Type {this.GetType()}";
         }
     }
 }

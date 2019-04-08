@@ -25,17 +25,17 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
             Player playerApple = new Player("Apple", 10, new string[] { "mp3", "wav" });
             Player playerSamsung = new Player("Samsung", 15, new string[] { "mp3", "ogg", "aac" });
 
-            Console.WriteLine(laptopLenovo.GetDescription());
-            Console.WriteLine(laptopSamsung.GetDescription());
-            Console.WriteLine(serverDell.GetDescription());
-            Console.WriteLine(serverHPE.GetDescription());
+            Console.WriteLine(laptopLenovo);
+            Console.WriteLine(laptopSamsung);
+            Console.WriteLine(serverDell);
+            Console.WriteLine(serverHPE);
 
-            Console.WriteLine(plasmaSamsung.GetDescription());
-            Console.WriteLine(plasmaToshiba.GetDescription());
-            Console.WriteLine(cathodeRayTubeLG.GetDescription());
-            Console.WriteLine(cathodeRayTubeVega.GetDescription());
-            Console.WriteLine(playerApple.GetDescription());
-            Console.WriteLine(playerSamsung.GetDescription());
+            Console.WriteLine(plasmaSamsung);
+            Console.WriteLine(plasmaToshiba);
+            Console.WriteLine(cathodeRayTubeLG);
+            Console.WriteLine(cathodeRayTubeVega);
+            Console.WriteLine(playerApple);
+            Console.WriteLine(playerSamsung);
 
             Console.ReadKey();
         }
