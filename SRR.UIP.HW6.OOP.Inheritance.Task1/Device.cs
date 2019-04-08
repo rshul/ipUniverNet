@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRR.UIP.HW6.OOP.Inheritance.Task1
 {
-    class Device
+    abstract class  Device
     {
         public string Name { get; private set; }
         public int PowerConsumption { get; private set; }
@@ -15,6 +15,14 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
             this.Name = name;
             this.PowerConsumption = powerConsumption;
         }
-        
+        public static int TotalPowerConsumption(params Device[] devices)
+        {
+            int sumOfPowerConsumption = 0;
+            foreach (var device in devices)
+            {
+                sumOfPowerConsumption += device.PowerConsumption;
+            }
+            return sumOfPowerConsumption;
+        }
     }
 }

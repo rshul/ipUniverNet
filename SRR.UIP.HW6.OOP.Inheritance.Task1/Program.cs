@@ -37,6 +37,23 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
             Console.WriteLine(playerApple);
             Console.WriteLine(playerSamsung);
 
+            List<Device> devices = new List<Device>
+            {
+                laptopLenovo,
+                laptopSamsung,
+                plasmaSamsung,
+                plasmaToshiba,
+                serverDell,
+                serverHPE,
+                cathodeRayTubeLG,
+                cathodeRayTubeVega,
+                playerApple,
+                playerSamsung
+            };
+
+            int devicesPowerConsumtioin = Device.TotalPowerConsumption(devices.ToArray());
+            Console.WriteLine($"Power consumption: {devicesPowerConsumtioin}");
+
             Console.ReadKey();
         }
     }

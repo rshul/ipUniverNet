@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRR.UIP.HW6.OOP.Inheritance.Task1
 {
-    class TVDevice:Device
+    abstract class TVDevice:Device
     {
         public int ScreenDiagonal { get; private set; }
         public TVDevice(string name, int powerConsumption, int screenDiagonal):base(name, powerConsumption)
