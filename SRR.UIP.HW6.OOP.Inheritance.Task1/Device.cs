@@ -10,12 +10,14 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
     {
         public string Name { get; private set; }
         public int PowerConsumption { get; private set; }
+
         public Device(string name, int powerConsumption)
         {
             this.Name = name;
             this.PowerConsumption = powerConsumption;
         }
-        public static int TotalPowerConsumption(params Device[] devices)
+
+        public static int CountTotalPowerConsumption(params Device[] devices)
         {
             int sumOfPowerConsumption = 0;
             foreach (var device in devices)
@@ -24,5 +26,20 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
             }
             return sumOfPowerConsumption;
         }
+
+        public static int CountTotalRamOfDevices(params Device[] devices)
+        {
+            int sumOfDevicesRam = 0;
+            foreach (var device in devices)
+            {
+                if (device is ComputerDevice)
+                {
+                    ComputerDevice computer = (ComputerDevice)device;
+                    sumOfDevicesRam += computer.Ram;
+                }
+            }
+            return sumOfDevicesRam;
+        }
+
     }
 }

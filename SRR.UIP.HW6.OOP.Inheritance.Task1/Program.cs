@@ -51,8 +51,9 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
                 playerSamsung
             };
 
-            int devicesPowerConsumtioin = Device.TotalPowerConsumption(devices.ToArray());
-            Console.WriteLine($"Power consumption: {devicesPowerConsumtioin}");
+            int devicesPowerConsumtioin = Device.CountTotalPowerConsumption(devices.ToArray());
+            int devicesRam = Device.CountTotalRamOfDevices(devices.ToArray());
+            Console.WriteLine($"Power consumption: {devicesPowerConsumtioin}, ram of computers {devicesRam}");
 
             Console.ReadKey();
         }
