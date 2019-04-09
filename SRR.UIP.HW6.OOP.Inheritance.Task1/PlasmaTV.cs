@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRR.UIP.HW6.OOP.Inheritance.Task1
 {
-    class PlasmaTV : TVDevice
+    sealed class  PlasmaTV : TVDevice
     {
         public string Resolution { get; private set; }
 

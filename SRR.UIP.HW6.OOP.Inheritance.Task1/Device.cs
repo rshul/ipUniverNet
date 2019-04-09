@@ -8,11 +8,20 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
 {
     abstract class  Device
     {
+        private static int NumerationCounterOfDevices { get; set; }
+        public int DeviceId { get; private set; }
+        public bool IsSetDeviceId { get; private set; }
         public string Name { get; private set; }
         public int PowerConsumption { get; private set; }
 
+        static Device()
+        {
+            Random randomizer = new Random();
+            NumerationCounterOfDevices = randomizer.Next(0,100);
+        }
         public Device(string name, int powerConsumption)
         {
+            this.IsSetDeviceId = false;
             this.Name = name;
             this.PowerConsumption = powerConsumption;
         }
@@ -41,5 +50,10 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
             return sumOfDevicesRam;
         }
 
+        public void SetDeviceID()
+        {
+            this.DeviceId = NumerationCounterOfDevices++;
+            this.IsSetDeviceId = true;
+        }
     }
 }
