@@ -50,6 +50,7 @@
     <Compile Include="Master.cs" />
     <Compile Include="Newbie.cs" />
     <Compile Include="Order.cs" />
+    <Compile Include="Plant.cs" />
     <Compile Include="Profi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
