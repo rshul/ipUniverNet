@@ -13,7 +13,7 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
 
             List<ElectricDevice> devices = new List<ElectricDevice>
             {
-                new Generator(1000),
+                new Generator(3000),
                 new ConsumptionDevice(700),
                 new ConsumptionDevice(700),
                 new ConsumptionDevice(700),
@@ -23,6 +23,7 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
 
             DevicesOperator devicesOperator = new DevicesOperator(devices);
             devicesOperator.ConnectDevices();
+            devicesOperator.ShowDevices();
             Console.ReadLine();
         }
     }

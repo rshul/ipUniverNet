@@ -39,17 +39,45 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
                     {
                         if (device is ConsumptionDevice)
                         {
-                            bool isNotPossibleToContinue = previousLink.PlugDevice((ConsumptionDevice)device);
-                            if (isNotPossibleToContinue)
+                            bool isPossibleToContinue = previousLink.PlugDevice((ConsumptionDevice)device);
+                            if (!isPossibleToContinue)
                             {
                                 break;
                             }
-                            
+                            previousLink = device;
                         }
                     }
                 }
 
             }
+        }
+
+        public void ShowDevices()
+        {
+            if (IsLessThanTwoDevices)
+            {
+                Console.WriteLine($"No one device is connect");
+                return;
+            }
+
+            Generator generator = FindGenerator();
+            if (generator == null)
+            {
+                Console.WriteLine("Generator is absent");
+                return;
+            }
+            ElectricDevice previousLink = (ElectricDevice)generator; 
+            for (int i = 0; i < this.SupportedDevices.Count - 1; i++)
+            {
+                ElectricDevice currentDevice = previousLink.NextDevice;
+                if (currentDevice == null)
+                {
+                    return;
+                }
+                Console.WriteLine($"Device id {currentDevice.DeviceId} connected with available power {currentDevice.AvailablePower}");
+                previousLink = currentDevice;
+            }
+
         }
 
         private Generator FindGenerator()
