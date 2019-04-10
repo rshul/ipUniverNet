@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsumptionDevice.cs" />
+    <Compile Include="DevicesOperator.cs" />
     <Compile Include="ElectricDevice.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="Program.cs" />

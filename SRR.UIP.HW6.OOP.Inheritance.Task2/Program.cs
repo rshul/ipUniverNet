@@ -10,17 +10,19 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
     {
         static void Main(string[] args)
         {
-            Generator generator = new Generator(1000);
-            ConsumptionDevice device1 = new ConsumptionDevice(700);
-            ConsumptionDevice device2 = new ConsumptionDevice(700);
-            ConsumptionDevice device3 = new ConsumptionDevice(700);
-            ConsumptionDevice device4 = new ConsumptionDevice(700);
 
-            generator.PlugDevice(device1);
-            device1.PlugDevice(device2);
-            device2.PlugDevice(device3);
-            device3.PlugDevice(device4);
+            List<ElectricDevice> devices = new List<ElectricDevice>
+            {
+                new Generator(1000),
+                new ConsumptionDevice(700),
+                new ConsumptionDevice(700),
+                new ConsumptionDevice(700),
+                new ConsumptionDevice(700),
+                new ConsumptionDevice(700)
+            };
 
+            DevicesOperator devicesOperator = new DevicesOperator(devices);
+            devicesOperator.ConnectDevices();
             Console.ReadLine();
         }
     }

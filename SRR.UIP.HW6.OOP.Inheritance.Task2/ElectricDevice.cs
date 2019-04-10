@@ -8,10 +8,15 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
 {
    internal abstract class ElectricDevice
     {
+        public Guid DeviceId { get; private set; }
         public abstract int AvailablePower { get; }
         public ElectricDevice NextDevice { get; private set; }
         public ElectricDevice PreviousDevice { get; private set; }
-        
+
+        public ElectricDevice()
+        {
+            this.DeviceId = Guid.NewGuid();
+        }
         public virtual bool PlugDevice(ConsumptionDevice device)
         {
             if (NextDevice != null || AvailablePower < device.ConsumptionPower)
@@ -23,6 +28,6 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
             return true;
         }
 
-        public virtual void UnplugPower() { }
+        public virtual void UnplugDevice() { }
     }
 }
