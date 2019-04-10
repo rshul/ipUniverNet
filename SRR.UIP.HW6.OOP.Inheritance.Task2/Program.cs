@@ -24,6 +24,9 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
             DevicesOperator devicesOperator = new DevicesOperator(devices);
             devicesOperator.ConnectDevices();
             devicesOperator.ShowDevices();
+            devicesOperator.SupportedDevices[2].UnplugDevice();
+            devicesOperator.ShowDevices();
+
             Console.ReadLine();
         }
     }

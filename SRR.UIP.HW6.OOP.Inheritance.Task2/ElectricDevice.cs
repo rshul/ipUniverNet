@@ -28,6 +28,17 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
             return true;
         }
 
-        public virtual void UnplugDevice() { }
+        public virtual bool UnplugDevice()
+        {
+            if (this.NextDevice == null)
+            {
+                return false;
+            }
+            this.NextDevice.PreviousDevice = null;
+            this.NextDevice.UnplugDevice();
+            this.NextDevice = null;
+            return true;
+
+        }
     }
 }
