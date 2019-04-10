@@ -44,12 +44,7 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task4
                 "Oleh",
                 "Vitia"
             };
-            string[] workerQualifications = new string[3]
-            {
-                "newbie",
-                "profi",
-                "master"
-            };
+           
             Random randomizer = new Random();
             List<Worker> unemployedWorkers = new List<Worker>();
 
@@ -58,7 +53,24 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task4
                 int randomWorkerName = randomizer.Next(0, 8);
                 int randomWorkerQualification = randomizer.Next(0, 3);
                 int randomWorkerSalary = randomizer.Next(10, 50);
-                unemployedWorkers.Add(new Worker(workerNames[randomWorkerName], workerQualifications[randomWorkerQualification], randomWorkerSalary));
+                Worker randomWorker;
+                switch (randomWorkerQualification)
+                {
+                    case 0:
+                        randomWorker = new Newbie(workerNames[randomWorkerName], randomWorkerSalary);
+                        break;
+                    case 1:
+                        randomWorker = new Profi(workerNames[randomWorkerName], randomWorkerSalary);
+                        break;
+                    case 2:
+                        randomWorker = new Master(workerNames[randomWorkerName], randomWorkerSalary);
+                        break;
+                    default:
+                        Console.WriteLine("switch error");
+                        randomWorker = new Newbie(workerNames[randomWorkerName], randomWorkerSalary);
+                        break;
+                }
+                unemployedWorkers.Add(randomWorker);
             }
             return unemployedWorkers;
         }
