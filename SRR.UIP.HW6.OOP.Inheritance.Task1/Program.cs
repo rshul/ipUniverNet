@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace SRR.UIP.HW6.OOP.Inheritance.Task1
 {
@@ -51,15 +53,10 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
                 playerSamsung
             };
 
-            int devicesPowerConsumtioin = Device.CountTotalPowerConsumption(devices.ToArray());
-            int devicesRam = Device.CountTotalRamOfDevices(devices.ToArray());
+            int devicesPowerConsumtioin = Device.CountTotalPowerConsumption(devices);
+            int devicesRam = Device.CountTotalRamOfDevices(devices);
             Console.WriteLine($"Power consumption: {devicesPowerConsumtioin}, ram of computers {devicesRam}");
-            //foreach (var device in devices)
-            //{
-            //    device.SetDeviceID();
-            //}
-            laptopLenovo.SetDeviceID();
-            laptopSamsung.SetDeviceID();
+            
             foreach (var device in devices)
             {
                 string idsDevices = device.IsSetDeviceId ? device.DeviceId.ToString() : "not set";
