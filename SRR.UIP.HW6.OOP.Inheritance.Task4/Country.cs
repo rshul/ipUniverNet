@@ -44,7 +44,7 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task4
                 "Oleh",
                 "Vitia"
             };
-           
+
             Random randomizer = new Random();
             List<Worker> unemployedWorkers = new List<Worker>();
 
@@ -57,17 +57,17 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task4
                 switch (randomWorkerQualification)
                 {
                     case 0:
-                        randomWorker = new Newbie(workerNames[randomWorkerName], randomWorkerSalary);
+                        randomWorker = new Worker(workerNames[randomWorkerName], WorkerQualification.Newbie, randomWorkerSalary);
                         break;
                     case 1:
-                        randomWorker = new Profi(workerNames[randomWorkerName], randomWorkerSalary);
+                        randomWorker = new Worker(workerNames[randomWorkerName], WorkerQualification.Profi, randomWorkerSalary);
                         break;
                     case 2:
-                        randomWorker = new Master(workerNames[randomWorkerName], randomWorkerSalary);
+                        randomWorker = new Worker(workerNames[randomWorkerName], WorkerQualification.Master, randomWorkerSalary);
                         break;
                     default:
                         Console.WriteLine("switch error");
-                        randomWorker = new Newbie(workerNames[randomWorkerName], randomWorkerSalary);
+                        randomWorker = new Worker(workerNames[randomWorkerName], WorkerQualification.Newbie, randomWorkerSalary);
                         break;
                 }
                 unemployedWorkers.Add(randomWorker);
@@ -79,7 +79,7 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task4
         {
             Order generatedOrder = new Order();
             generatedOrder.Aggregates = new List<Aggregate>();
-            
+
             int randomNumberOfCars = randomizer.Next(1, 7);
             for (int i = 0; i < randomNumberOfCars; i++)
             {

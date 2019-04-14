@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 
 namespace SRR.UIP.HW6.OOP.Inheritance.Task4
 {
-   abstract class Worker
+    class Worker
     {
         public string Name { get; private set; }
-        public abstract string Qualification { get; }
+        public string Qualification { get; }
         public int Salary { get; private set; }
-        public abstract int Productivity { get; }
+        public int Productivity { get; }
         public int UsedWorkingUnits { get; private set; }
 
-        public Worker(string name, int salary)
+        public Worker(string name, WorkerQualification workerQualification, int salary)
         {
+            this.Qualification = workerQualification.ToString();
+            this.Productivity = (int)workerQualification;
             this.Name = name;
             this.Salary = salary;
             this.UsedWorkingUnits = 0;
@@ -26,7 +28,7 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task4
             takenAggregate.IncreaseProductionCosts(this.Salary);
             GetTired();
         }
- 
+
         private void GetTired()
         {
             int incrementedUsedWorkingUnits = this.UsedWorkingUnits + 1;
