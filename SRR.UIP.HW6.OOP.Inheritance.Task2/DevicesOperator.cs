@@ -9,7 +9,7 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
     class DevicesOperator
     {
         public List<ElectricDevice> SupportedDevices { get; private set; }
-        
+
         public bool IsLessThanTwoDevices
         {
             get
@@ -19,7 +19,7 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
                     return true;
                 }
                 return false;
-            }    
+            }
         }
 
 
@@ -30,25 +30,27 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
 
         public void ConnectDevices()
         {
-            if (FindGenerator() != null)
+            if (FindGenerator() == null || this.IsLessThanTwoDevices)
             {
-                ElectricDevice previousLink = (ElectricDevice)FindGenerator();
-                if (!this.IsLessThanTwoDevices)
+                return;
+            }
+
+            
+            if (!this.IsLessThanTwoDevices)
+            {
+                ElectricDevice previousLink = FindGenerator();
+                foreach (var device in this.SupportedDevices)
                 {
-                    foreach (var device in this.SupportedDevices)
+                    if (device is ConsumptionDevice)
                     {
-                        if (device is ConsumptionDevice)
+                        bool isPossibleToContinue = previousLink.PlugDevice((ConsumptionDevice)device);
+                        if (!isPossibleToContinue)
                         {
-                            bool isPossibleToContinue = previousLink.PlugDevice((ConsumptionDevice)device);
-                            if (!isPossibleToContinue)
-                            {
-                                break;
-                            }
-                            previousLink = device;
+                            break;
                         }
+                        previousLink = device;
                     }
                 }
-
             }
         }
 
@@ -66,7 +68,7 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task2
                 Console.WriteLine("Generator is absent");
                 return;
             }
-            ElectricDevice previousLink = (ElectricDevice)generator; 
+            ElectricDevice previousLink = generator;
             for (int i = 0; i < this.SupportedDevices.Count - 1; i++)
             {
                 ElectricDevice currentDevice = previousLink.NextDevice;

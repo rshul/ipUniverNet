@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SRR.UIP.HW6.OOP.Inheritance.Task1
 {
-    class Laptop:ComputerDevice
+    class Laptop : ComputerDevice
     {
         public int Weight { get; private set; }
         public Laptop(string name, int powerConsumption, int ram, int weight):base(name, powerConsumption, ram)
@@ -16,7 +16,8 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task1
 
         public override string ToString()
         {
-            return $"Laptop {this.Name}, power consumption {this.PowerConsumption}, RAM {this.Ram}, weight {this.Weight}. Type: {this.GetType()}";
+            return $"Laptop {this.Name}, power consumption {this.PowerConsumption}," +
+                $" RAM {this.Ram}, weight {this.Weight}. Type: {this.GetType()}";
         }
     }
 }
