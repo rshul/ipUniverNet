@@ -8,8 +8,12 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task4
 {
     class Car:Aggregate
     {
+        public double EngineVolume { get; private set; }
         public Car() : base("NoNameCar", 10) { }
-        public Car(int numberOfDetails) : base("NoNameCar", numberOfDetails) { }
+        public Car(int numberOfDetails, double engineVolume) : base("NoNameCar", numberOfDetails)
+        {
+            this.EngineVolume = engineVolume;
+        }
         
     }
 }

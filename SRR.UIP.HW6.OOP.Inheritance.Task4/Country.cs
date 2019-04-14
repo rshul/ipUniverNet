@@ -83,12 +83,12 @@ namespace SRR.UIP.HW6.OOP.Inheritance.Task4
             int randomNumberOfCars = randomizer.Next(1, 7);
             for (int i = 0; i < randomNumberOfCars; i++)
             {
-                generatedOrder.Aggregates.Add(new Car(randomizer.Next(2, 15)));
+                generatedOrder.Aggregates.Add(new Car(randomizer.Next(2, 15), 1 + 2 * randomizer.NextDouble()));
             }
             int randomNumberOfTanks = randomizer.Next(1, 7);
             for (int i = 0; i < randomNumberOfTanks; i++)
             {
-                generatedOrder.Aggregates.Add(new Tank(randomizer.Next(4, 20)));
+                generatedOrder.Aggregates.Add(new Tank(randomizer.Next(4, 20), randomizer.Next(500, 1500) ));
             }
             return generatedOrder;
         }
