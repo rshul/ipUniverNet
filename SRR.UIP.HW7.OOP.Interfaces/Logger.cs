@@ -24,37 +24,35 @@ namespace SRR.UIP.HW7.OOP.Interfaces
         public List<ILogStorage> LogStorages { get; } = new List<ILogStorage>();
         public void Info(string message)
         {
-            WriteToStorages(1, Program.GetCurrentMethodName(), message);
+            WriteToStorages(1, Program.GetMethodName(), message);
         }
 
         public void Debug(string message)
         {
-            WriteToStorages(2, Program.GetCurrentMethodName(), message);
-
-
+            WriteToStorages(2, Program.GetMethodName(), message);
         }
 
         public void Error(string message)
         {
-            WriteToStorages(4, Program.GetCurrentMethodName(), message);
+            WriteToStorages(4, Program.GetMethodName(), message);
         }
 
         public void Fatal(string message)
         {
-            WriteToStorages(5, Program.GetCurrentMethodName(), message);
+            WriteToStorages(5, Program.GetMethodName(), message);
         }
 
         public void Warn(string message)
         {
-            WriteToStorages(3, Program.GetCurrentMethodName(), message);
+            WriteToStorages(3, Program.GetMethodName(), message);
         }
-        public void WriteToStorages(int logLevelInt, string loglevel, string message)
+        public void WriteToStorages(int logLevelInt, string methodName, string message)
         {
             if (logLevelInt >= this.LogLevel)
             {
                 foreach (var storage in LogStorages)
                 {
-                    storage.Write($"{loglevel}{DateTime.Now}{message}");
+                    storage.Write($"{logLevelInt} {DateTime.Now} {message}");
                 }
             }
 
