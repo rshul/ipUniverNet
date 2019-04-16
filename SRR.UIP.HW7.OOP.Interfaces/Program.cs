@@ -25,16 +25,18 @@ namespace SRR.UIP.HW7.OOP.Interfaces
         {
             Logger logger = new Logger();
             logger.LogStorages.Add(new ConsoleLogStorage());
-            logger.LogStorages.Add(new FileLogStorage());    
+            logger.LogStorages.Add(new FileLogStorage());
             logger.LogLevel = 1;
-           
 
-            List<Point> points = GetPoints();
-            Console.WriteLine($"{CalculateArea(points,true)} = {CalculateArea(points, false)}");
 
-            Console.ReadLine();
+            List<Point> points = GetPoints(5);
+            Console.WriteLine($"{CalculateArea(points, true)} = {CalculateArea(points, false)}");
+            GetPoint(1);
+
+
+            Console.ReadKey();
         }
-        static List<Point> GetPoints()
+        static List<Point> GetPointsTest()
         {
             List<Point> setOfPoints = new List<Point>
             {
@@ -45,6 +47,40 @@ namespace SRR.UIP.HW7.OOP.Interfaces
                 new Point(4,0)
             };
             return setOfPoints;
+        }
+        static List<Point> GetPoints(int PointsNumber)
+        {
+            if (PointsNumber <= 0 || PointsNumber > 20)
+            {
+                return null;
+            }
+            Point tempPoint;
+            List<Point> tempListOfPoints = new List<Point>();
+            int pointsCounter = 0;
+            bool isWrongInput = false;
+            while(pointsCounter < PointsNumber)
+            {
+                tempPoint = GetPoint(pointsCounter);
+                if (pointsCounter > 0)
+                {
+                    foreach (var point in tempListOfPoints)
+                    {
+                        if (tempPoint.Equals(point))
+                        {
+                            isWrongInput = true;
+                            break;
+                        } 
+                    }
+                    if (isWrongInput)
+                    {
+                        continue;
+                    }
+                }
+                tempListOfPoints.Add(tempPoint);
+                pointsCounter++;
+            }
+            
+            return tempListOfPoints;
         }
 
         static long CalculateArea(List<Point> points, bool isAltAppr)
@@ -64,7 +100,30 @@ namespace SRR.UIP.HW7.OOP.Interfaces
             return result;
         }
 
+        static Point GetPoint(int pointNumber)
+        {
+            string enteredStringNumber;
+            int xCoord;
+            int yCoord;
+            bool isParsedOK = false;
+            Console.WriteLine($"Enter coordinates of {pointNumber} point");
+            do
+            {
+                Console.Write("X => ");
+                enteredStringNumber = Console.ReadLine();
+                isParsedOK = int.TryParse(enteredStringNumber, out xCoord);
+            } while (!isParsedOK);
 
+            do
+            {
+                Console.Write("Y => ");
+                enteredStringNumber = Console.ReadLine();
+                isParsedOK = int.TryParse(enteredStringNumber, out yCoord);
+            } while (!isParsedOK);
+
+            return new Point(xCoord, yCoord);
+
+        }
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static string GetMethodName()
         {
