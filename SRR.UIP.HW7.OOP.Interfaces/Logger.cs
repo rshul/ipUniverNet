@@ -8,13 +8,13 @@ namespace SRR.UIP.HW7.OOP.Interfaces
 {
     class Logger : ILogger
     {
-        private int _logLevel;
-        public int LogLevel
+        private LevelsOfLog _logLevel;
+        public LevelsOfLog LogLevel
         {
             get { return this._logLevel; }
             set
             {
-                if (value < 1 || value > 5)
+                if (!Enum.IsDefined(typeof(LevelsOfLog), value))
                 {
                     return;
                 }

@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace SRR.UIP.HW7.OOP.Interfaces
 {
+    enum LevelsOfLog
+    {
+        Info = 1,
+        Debug = 2,
+        Warn = 3,
+        Error = 4,
+        Fatal = 5
+    }
     struct Point
     {
         public int X;
@@ -26,13 +34,10 @@ namespace SRR.UIP.HW7.OOP.Interfaces
             Logger logger = new Logger();
             logger.LogStorages.Add(new ConsoleLogStorage());
             logger.LogStorages.Add(new FileLogStorage());
-            logger.LogLevel = 1;
+            logger.LogLevel = LevelsOfLog.Info;
 
-
-            List<Point> points = GetPoints(5);
-            Console.WriteLine($"{CalculateArea(points, true)} = {CalculateArea(points, false)}");
-            GetPoint(1);
-
+            List<Point> points = GetPoints(5, logger);
+            Console.WriteLine($"{CalculateArea(points, true, logger)} = {CalculateArea(points, false, logger)}");
 
             Console.ReadKey();
         }
@@ -48,19 +53,20 @@ namespace SRR.UIP.HW7.OOP.Interfaces
             };
             return setOfPoints;
         }
-        static List<Point> GetPoints(int PointsNumber)
+        static List<Point> GetPoints(int PointsNumber, Logger logger)
         {
             if (PointsNumber <= 0 || PointsNumber > 20)
             {
+                logger.Warn("Number of points must be  0 < x <=20");
                 return null;
             }
             Point tempPoint;
             List<Point> tempListOfPoints = new List<Point>();
             int pointsCounter = 0;
             bool isWrongInput = false;
-            while(pointsCounter < PointsNumber)
+            while (pointsCounter < PointsNumber)
             {
-                tempPoint = GetPoint(pointsCounter);
+                tempPoint = GetPoint(pointsCounter, logger);
                 if (pointsCounter > 0)
                 {
                     foreach (var point in tempListOfPoints)
@@ -68,8 +74,9 @@ namespace SRR.UIP.HW7.OOP.Interfaces
                         if (tempPoint.Equals(point))
                         {
                             isWrongInput = true;
+                            logger.Warn("Points can not be the same");
                             break;
-                        } 
+                        }
                     }
                     if (isWrongInput)
                     {
@@ -77,14 +84,20 @@ namespace SRR.UIP.HW7.OOP.Interfaces
                     }
                 }
                 tempListOfPoints.Add(tempPoint);
+                logger.Info($"Point {pointsCounter} with value ({tempPoint.X},{tempPoint.Y}) added");
+                CalculateArea(tempListOfPoints, true, logger);
+                CalculateArea(tempListOfPoints, false, logger);
                 pointsCounter++;
+
             }
-            
+
             return tempListOfPoints;
         }
 
-        static long CalculateArea(List<Point> points, bool isAltAppr)
+        static long CalculateArea(List<Point> points, bool isAltAppr, Logger logger)
         {
+            string calculationMode = isAltAppr ? "Main Calculation" : "Control calculation";
+            logger.Info(calculationMode);
             long landArea = 0;
             for (int i = 0; i < points.Count; i++)
             {
@@ -93,14 +106,14 @@ namespace SRR.UIP.HW7.OOP.Interfaces
                 long par1 = isAltAppr ? points[i].X : points[i].Y;
                 long par2_1 = isAltAppr ? points[nextIndex].Y : points[prevIndex].X;
                 long par2_2 = isAltAppr ? points[prevIndex].Y : points[nextIndex].X;
-                long tempLandArea = landArea;
                 landArea += par1 * (par2_1 - par2_2);
             }
             long result = (long)Math.Abs(landArea / 2);
+            logger.Info($"Calculated result {result}");
             return result;
         }
 
-        static Point GetPoint(int pointNumber)
+        static Point GetPoint(int pointNumber, Logger logger)
         {
             string enteredStringNumber;
             int xCoord;
@@ -112,6 +125,10 @@ namespace SRR.UIP.HW7.OOP.Interfaces
                 Console.Write("X => ");
                 enteredStringNumber = Console.ReadLine();
                 isParsedOK = int.TryParse(enteredStringNumber, out xCoord);
+                if (!isParsedOK)
+                {
+                    logger.Error($"Point {pointNumber}, not valid value X");
+                }
             } while (!isParsedOK);
 
             do
@@ -119,8 +136,12 @@ namespace SRR.UIP.HW7.OOP.Interfaces
                 Console.Write("Y => ");
                 enteredStringNumber = Console.ReadLine();
                 isParsedOK = int.TryParse(enteredStringNumber, out yCoord);
+                if (!isParsedOK)
+                {
+                    logger.Error($"Point {pointNumber}, not valid value Y");
+                }
             } while (!isParsedOK);
-
+            logger.Info($"Point {pointNumber} created, ({xCoord},{yCoord})");
             return new Point(xCoord, yCoord);
 
         }
