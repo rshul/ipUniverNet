@@ -34,11 +34,15 @@ namespace SRR.UIP.HW7.OOP.Interfaces
             Logger logger = new Logger();
             logger.LogStorages.Add(new ConsoleLogStorage());
             logger.LogStorages.Add(new FileLogStorage());
-            logger.LogLevel = LevelsOfLog.Info;
+            logger.LogLevel = LevelsOfLog.Warn;
 
             List<Point> points = GetPoints(5, logger);
             Console.WriteLine($"{CalculateArea(points, true, logger)} = {CalculateArea(points, false, logger)}");
-
+            logger.LogLevel = LevelsOfLog.Fatal;
+            if (CalculateArea(points, true, logger) == CalculateArea(points, false, logger) && CalculateArea(points, true, logger) > 0)
+            {
+                Console.WriteLine($"Caclulated area is {CalculateArea(points, true, logger)}");
+            }
             Console.ReadKey();
         }
         static List<Point> GetPointsTest()
