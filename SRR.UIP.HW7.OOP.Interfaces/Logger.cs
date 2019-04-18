@@ -8,13 +8,13 @@ namespace SRR.UIP.HW7.OOP.Interfaces
 {
     class Logger : ILogger
     {
-        private LevelsOfLog _logLevel;
-        public LevelsOfLog LogLevel
+        private LogLevels _logLevel;
+        public LogLevels LogLevel
         {
             get { return this._logLevel; }
             set
             {
-                if (!Enum.IsDefined(typeof(LevelsOfLog), value))
+                if (!Enum.IsDefined(typeof(LogLevels), value))
                 {
                     return;
                 }
@@ -24,29 +24,29 @@ namespace SRR.UIP.HW7.OOP.Interfaces
         public List<ILogStorage> LogStorages { get; } = new List<ILogStorage>();
         public void Info(string message)
         {
-            WriteToStorages(LevelsOfLog.Info, Program.GetMethodName(), message);
+            WriteToStorages(LogLevels.Info, Program.GetMethodName(), message);
         }
 
         public void Debug(string message)
         {
-            WriteToStorages(LevelsOfLog.Debug, Program.GetMethodName(), message);
+            WriteToStorages(LogLevels.Debug, Program.GetMethodName(), message);
         }
 
         public void Error(string message)
         {
-            WriteToStorages(LevelsOfLog.Error, Program.GetMethodName(), message);
+            WriteToStorages(LogLevels.Error, Program.GetMethodName(), message);
         }
 
         public void Fatal(string message)
         {
-            WriteToStorages(LevelsOfLog.Fatal, Program.GetMethodName(), message);
+            WriteToStorages(LogLevels.Fatal, Program.GetMethodName(), message);
         }
 
         public void Warn(string message)
         {
-            WriteToStorages(LevelsOfLog.Warn, Program.GetMethodName(), message);
+            WriteToStorages(LogLevels.Warn, Program.GetMethodName(), message);
         }
-        public void WriteToStorages(LevelsOfLog logLevelInt, string methodName, string message)
+        public void WriteToStorages(LogLevels logLevelInt, string methodName, string message)
         {
             if (logLevelInt >= this.LogLevel)
             {

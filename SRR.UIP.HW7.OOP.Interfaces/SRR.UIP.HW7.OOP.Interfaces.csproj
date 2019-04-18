@@ -48,6 +48,8 @@
     <Compile Include="ILogger.cs" />
     <Compile Include="ILogStorage.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="LogLevels.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

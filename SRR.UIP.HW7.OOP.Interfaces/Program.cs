@@ -8,25 +8,6 @@ using System.Threading.Tasks;
 
 namespace SRR.UIP.HW7.OOP.Interfaces
 {
-    enum LevelsOfLog
-    {
-        Info = 1,
-        Debug = 2,
-        Warn = 3,
-        Error = 4,
-        Fatal = 5
-    }
-    struct Point
-    {
-        public int X;
-        public int Y;
-
-        public Point(int x, int y)
-        {
-            this.X = x;
-            this.Y = y;
-        }
-    }
     class Program
     {
         static void Main(string[] args)
@@ -34,17 +15,18 @@ namespace SRR.UIP.HW7.OOP.Interfaces
             Logger logger = new Logger();
             logger.LogStorages.Add(new ConsoleLogStorage());
             logger.LogStorages.Add(new FileLogStorage());
-            logger.LogLevel = LevelsOfLog.Warn;
+            logger.LogLevel = LogLevels.Warn;
 
             List<Point> points = GetPoints(5, logger);
             Console.WriteLine($"{CalculateArea(points, true, logger)} = {CalculateArea(points, false, logger)}");
-            logger.LogLevel = LevelsOfLog.Fatal;
+            logger.LogLevel = LogLevels.Fatal;
             if (CalculateArea(points, true, logger) == CalculateArea(points, false, logger) && CalculateArea(points, true, logger) > 0)
             {
                 Console.WriteLine($"Caclulated area is {CalculateArea(points, true, logger)}");
             }
             Console.ReadKey();
         }
+
         static List<Point> GetPointsTest()
         {
             List<Point> setOfPoints = new List<Point>
@@ -57,6 +39,7 @@ namespace SRR.UIP.HW7.OOP.Interfaces
             };
             return setOfPoints;
         }
+
         static List<Point> GetPoints(int PointsNumber, Logger logger)
         {
             if (PointsNumber <= 0 || PointsNumber > 20)
@@ -149,6 +132,7 @@ namespace SRR.UIP.HW7.OOP.Interfaces
             return new Point(xCoord, yCoord);
 
         }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static string GetMethodName()
         {
