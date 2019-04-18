@@ -20,9 +20,11 @@ namespace SRR.UIP.HW7.OOP.Interfaces
             List<Point> points = GetPoints(5, logger);
             Console.WriteLine($"{CalculateArea(points, true, logger)} = {CalculateArea(points, false, logger)}");
             logger.LogLevel = LogLevels.Fatal;
-            if (CalculateArea(points, true, logger) == CalculateArea(points, false, logger) && CalculateArea(points, true, logger) > 0)
+            long calculatedArea = CalculateArea(points, true, logger);
+            bool isCalculatedAreaValid = calculatedArea == CalculateArea(points, false, logger);
+            if (isCalculatedAreaValid && calculatedArea > 0)
             {
-                Console.WriteLine($"Caclulated area is {CalculateArea(points, true, logger)}");
+                Console.WriteLine($"Caclulated area is {calculatedArea}");
             }
             Console.ReadKey();
         }
@@ -50,35 +52,42 @@ namespace SRR.UIP.HW7.OOP.Interfaces
             Point tempPoint;
             List<Point> tempListOfPoints = new List<Point>();
             int pointsCounter = 0;
-            bool isWrongInput = false;
             while (pointsCounter < PointsNumber)
             {
                 tempPoint = GetPoint(pointsCounter, logger);
-                if (pointsCounter > 0)
+                bool isInputValid = IsPointValid(tempListOfPoints, tempPoint, logger);
+                if (!isInputValid)
                 {
-                    foreach (var point in tempListOfPoints)
-                    {
-                        if (tempPoint.Equals(point))
-                        {
-                            isWrongInput = true;
-                            logger.Warn("Points can not be the same");
-                            break;
-                        }
-                    }
-                    if (isWrongInput)
-                    {
-                        continue;
-                    }
+                    continue;
                 }
                 tempListOfPoints.Add(tempPoint);
                 logger.Info($"Point {pointsCounter} with value ({tempPoint.X},{tempPoint.Y}) added");
-                CalculateArea(tempListOfPoints, true, logger);
-                CalculateArea(tempListOfPoints, false, logger);
                 pointsCounter++;
 
             }
 
             return tempListOfPoints;
+        }
+
+        static bool IsPointValid(List<Point> pointsCollection, Point takenPoint,  Logger logger)
+        {
+            if (pointsCollection.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                foreach (var point in pointsCollection)
+                {
+                    if (takenPoint.Equals(point))
+                    {
+                        logger.Warn("Points can not be the same");
+                        return false;
+                    }
+                }
+                return true;
+            }
+         
         }
 
         static long CalculateArea(List<Point> points, bool isAltAppr, Logger logger)
@@ -102,35 +111,29 @@ namespace SRR.UIP.HW7.OOP.Interfaces
 
         static Point GetPoint(int pointNumber, Logger logger)
         {
-            string enteredStringNumber;
             int xCoord;
             int yCoord;
-            bool isParsedOK = false;
+            
             Console.WriteLine($"Enter coordinates of {pointNumber} point");
-            do
-            {
-                Console.Write("X => ");
-                enteredStringNumber = Console.ReadLine();
-                isParsedOK = int.TryParse(enteredStringNumber, out xCoord);
-                if (!isParsedOK)
-                {
-                    logger.Error($"Point {pointNumber}, not valid value X");
-                }
-            } while (!isParsedOK);
-
-            do
-            {
-                Console.Write("Y => ");
-                enteredStringNumber = Console.ReadLine();
-                isParsedOK = int.TryParse(enteredStringNumber, out yCoord);
-                if (!isParsedOK)
-                {
-                    logger.Error($"Point {pointNumber}, not valid value Y");
-                }
-            } while (!isParsedOK);
+            InputCoordinate("X",logger, out xCoord);
+            InputCoordinate("Y", logger, out yCoord);
             logger.Info($"Point {pointNumber} created, ({xCoord},{yCoord})");
             return new Point(xCoord, yCoord);
+        }
 
+        private static void InputCoordinate(string coordinateName,Logger logger, out int coordinate)
+        {
+            bool isParsedOK = false;
+            do
+            {
+                Console.Write($"{coordinateName} => ");
+                string enteredStringNumber = Console.ReadLine();
+                isParsedOK = int.TryParse(enteredStringNumber, out coordinate);
+                if (!isParsedOK)
+                {
+                    logger.Error($"Not valid value of {coordinateName}");
+                }
+            } while (!isParsedOK);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
