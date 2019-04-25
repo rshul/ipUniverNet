@@ -8,17 +8,19 @@ namespace SRR.UIP.HW8.LandCalculator.Shared.Models
 {
     public class PointsValidationResult
     {
-        public bool ArePointsValid { get; }
+        public bool ArePointsValid { get; set; }
 
-        public string Message { get; }
+        public string Message { get; set; }
 
-        public List<PointsMistakes> Mistakes { get; }
+        public PointsMistakes Mistakes { get; set; }
     }
 
-    public enum PointsMistakes
+    [Flags]
+    public enum PointsMistakes:byte
     {
-        NotEnoughUniquePoints = 2,
-        CrossedShape = 4,
-        NotClosedShape = 8,
+        Nothing  = 0,
+        NotEnoughUniquePoints = 1,
+        CrossedShape = 2,
+        NotClosedShape = 4,
     }
 }

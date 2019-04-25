@@ -11,5 +11,6 @@ namespace SRR.UIP.HW8.LandCalculator.Shared.Interfaces
     public interface IPointsValidator
     {
         PointsValidationResult GetValidationResult(List<Point> points);
+
     }
 }

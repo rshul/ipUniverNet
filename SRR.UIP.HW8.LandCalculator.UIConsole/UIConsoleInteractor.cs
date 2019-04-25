@@ -1,5 +1,7 @@
-﻿using SRR.UIP.HW8.LandCalculator.Shared;
+﻿using SRR.UIP.HW8.LandCalculator.BLL.Services;
+using SRR.UIP.HW8.LandCalculator.Shared;
 using SRR.UIP.HW8.LandCalculator.Shared.Interfaces;
+using SRR.UIP.HW8.LandCalculator.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,27 +13,30 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
 {
     public class UIConsoleInteractor
     {
-        private ILandCalculator LandAreaCalculator;
+        private ILandCalculator LandAreaCalculator { get; }
+        private IPointsValidator PointsValidator { get; set; }
 
         public UIConsoleInteractor(ILandCalculator landAreaCalculator)
         {
             LandAreaCalculator = landAreaCalculator;
+            this.PointsValidator = new PointsValidator();
+
         }
 
         internal void Start()
         {
-            List<Point> points = GetPointsTest();
-
+            List<Point> points = GetPointsTest(0);
+            PointsValidationResult validationResult = PointsValidator.GetValidationResult(points);
+            Console.WriteLine($"Result validation: {validationResult.Message}; ");
             long landArea = LandAreaCalculator.CalculateLandArea(points);
 
             Console.WriteLine($"Result = {landArea}");
         }
 
-        private List<Point> GetPointsTest()
+        private List<Point> GetPointsTest(int choice)
         {
             List<Point> setOfPoints;
 
-            int choice = 0;
             switch (choice)
             {
                 case 0:
@@ -39,9 +44,10 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
                     {
                         new Point(0,0),
                         new Point(1,1),
-                        new Point(2,4),
-                        new Point(3,1),
-                        new Point(4,0)
+                        new Point(2,2),
+                        new Point(3,3),
+                        new Point(4,4),
+                        new Point(0,0)
                     };
                     break;
                 case 1:
@@ -58,7 +64,8 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
                         new Point(1,1),
                         new Point(2,4),
                         new Point(3,1),
-                        new Point(0,4)
+                        new Point(0,4),
+                        new Point(0,0)
                     };
                     break;
                 case 3://same point
@@ -78,6 +85,7 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
                         new Point(0,1),
                         new Point(1,1),
                         new Point(1,0),
+                        new Point(0,0)
                     };
                     break;
             }
@@ -97,10 +105,14 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
             while (pointsCounter < PointsNumber)
             {
                 tempPoint = GetPoint(pointsCounter);
-                bool isInputValid = IsPointValid(tempListOfPoints, tempPoint);
-                if (!isInputValid)
+                if (pointsCounter != PointsNumber - 1)
                 {
-                    continue;
+                    bool isInputValid = IsPointValid(tempListOfPoints, tempPoint);
+                    if (!isInputValid)
+                    {
+                        continue;
+                    }
+
                 }
                 tempListOfPoints.Add(tempPoint);
                 StaticInjector.Logger.Info($"Point {pointsCounter} with value ({tempPoint.X},{tempPoint.Y}) added");
