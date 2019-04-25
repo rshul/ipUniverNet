@@ -11,7 +11,7 @@ namespace SRR.UIP.HW8.LandCalculator.DAL.Storages
     {
         public void PrintMessage(string message)
         {
-            Console.WriteLine($"ConsoleLogStorage: {message}");
+            Console.WriteLine($"{"ConsoleLogStorage",20}:\t{message}");
         }
     }
 }

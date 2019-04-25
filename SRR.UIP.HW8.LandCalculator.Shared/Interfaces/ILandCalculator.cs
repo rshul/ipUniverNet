@@ -9,7 +9,7 @@ namespace SRR.UIP.HW8.LandCalculator.Shared.Interfaces
 {
     public interface ILandCalculator
     {
-        int CalculateLandArea(List<Point> points);
+        long CalculateLandArea(List<Point> points, bool isAltAppr = true);
     }
 
 }

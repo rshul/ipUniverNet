@@ -22,7 +22,7 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
         {
             List<Point> points = GetPointsTest();
 
-            int landArea = LandAreaCalculator.CalculateLandArea(points);
+            long landArea = LandAreaCalculator.CalculateLandArea(points);
 
             Console.WriteLine($"Result = {landArea}");
         }
