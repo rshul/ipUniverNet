@@ -36,16 +36,35 @@ namespace SRR.UIP.HW8.LandCalculator.BLL.Services
 
         private bool IsClosedContour(List<Point> points)
         {
+
             if (points == null || points.Count <= 2)
             {
                 return false;
             }
-            
+ 
             int pointsCount = points.Count;
-            bool isLastAndFirstPointsConnected =  points[0] == points[points.Count - 1];
-            bool isBeforeLastEdgeNotParallelWithPrevious = 
-                !float.IsNaN(FindIntersection(points[pointsCount-2], points[pointsCount - 3], points[pointsCount - 4], points[pointsCount - 2]).X);
-            return isLastAndFirstPointsConnected && isBeforeLastEdgeNotParallelWithPrevious;
+            bool isLastAndFirstPointsConnected =  points[0] == points[pointsCount - 1];
+            bool isNotOneLineOfEdges = IsNotOneLineOfEdges(points); 
+            
+            return isLastAndFirstPointsConnected && isNotOneLineOfEdges;
+        }
+
+        private bool IsNotOneLineOfEdges(List<Point> points)
+        {
+            Point pointStart, pointMiddle, pointEnd;
+            for (int i = 2; i < points.Count-1; i++)
+            {
+                pointStart = points[i - 2];
+                pointMiddle = points[i - 1];
+                pointEnd = points[i];
+                bool isNotOneLineWithThreePoints = !float.IsNaN(FindIntersection(pointStart, pointMiddle, pointMiddle, pointEnd).X);
+                if (isNotOneLineWithThreePoints)
+                {
+                    return true;
+                }
+
+            }
+            return false;
         }
 
         private int GetNumberOfDublicates(List<Point> points)
@@ -60,24 +79,25 @@ namespace SRR.UIP.HW8.LandCalculator.BLL.Services
 
         private bool IsCrossedContour(List<Point> points)
         {
-            if (points == null || points.Count <= 2)
+            List<Point> tempPoints = points.Distinct().ToList();
+            if (tempPoints == null || tempPoints.Count <= 2)
             {
                 return false;
             }
-            int pointsCount = points.Count;
+            int pointsCount = tempPoints.Count;
             Point sectionAPoint1, sectionAPoint2, sectionBPoint1, sectionBPoint2;
             for (int i = 2; i < pointsCount - 1; i++)
             {
-                sectionAPoint1 = points[i];
-                sectionAPoint2 = points[i + 1];
+                sectionAPoint1 = tempPoints[i];
+                sectionAPoint2 = tempPoints[i + 1];
                 for (int j = 0; j < i - 1; j++)
                 {
                     if (i == pointsCount - 2 && j == 0)
                     {
                         continue;
                     }
-                    sectionBPoint1 = points[j];
-                    sectionBPoint2 = points[j + 1];
+                    sectionBPoint1 = tempPoints[j];
+                    sectionBPoint2 = tempPoints[j + 1];
                     if (IsIntersection(sectionAPoint1, sectionAPoint2, sectionBPoint1, sectionBPoint2))
                     {
                         return true;

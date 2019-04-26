@@ -25,11 +25,10 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
 
         internal void Start()
         {
-            List<Point> points = GetPointsTest(0);
+            List<Point> points = GetPointsTest(3);
             PointsValidationResult validationResult = PointsValidator.GetValidationResult(points);
             Console.WriteLine($"Result validation: {validationResult.Message}; ");
             long landArea = LandAreaCalculator.CalculateLandArea(points);
-
             Console.WriteLine($"Result = {landArea}");
         }
 
@@ -75,7 +74,8 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
                         new Point(1,1),
                         new Point(1,1),
                         new Point(3,1),
-                        new Point(4,0)
+                        new Point(4,0),
+                        new Point(0,0)
                     };
                     break;
                 default:
