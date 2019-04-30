@@ -17,7 +17,7 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
             InitializeStorages();
             StaticInjector.Logger.Info("Program is started");
             
-            new UIConsoleInteractor(new LandAreaCalculator()).Start();
+            new UIConsoleInteractor(new LandAreaCalculator(), new PointsValidator()).Start();
             
             Console.ReadLine();
         }

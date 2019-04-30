@@ -14,16 +14,23 @@ namespace SRR.UIP.HW8.LandCalculator.BLL.Services
         public PointsValidationResult GetValidationResult(List<Point> points)
         {
             PointsValidationResult validationResult = new PointsValidationResult();
-            bool notEnoughUniquePoints = !IsPointsCountMoreThanTwo(points) || GetNumberOfDublicates(points) != 0;
             validationResult.Mistakes = PointsMistakes.Nothing;
-            validationResult.Mistakes = notEnoughUniquePoints ?
+            if (!IsPointsCountMoreThanTwo(points))
+            {
+                validationResult.Mistakes = PointsMistakes.NotEnoughUniquePoints;
+                validationResult.ArePointsValid = false;
+                validationResult.Message = $"Passed validation {validationResult.ArePointsValid}; Problems: {validationResult.Mistakes}";
+                return validationResult;
+            }
+            bool AreDublicates = GetNumberOfDublicates(points) != 0;
+            validationResult.Mistakes = AreDublicates ?
                 validationResult.Mistakes | PointsMistakes.NotEnoughUniquePoints : validationResult.Mistakes;
             validationResult.Mistakes = IsClosedContour(points) ? 
                 validationResult.Mistakes : validationResult.Mistakes | PointsMistakes.NotClosedShape;
             validationResult.Mistakes = IsCrossedContour(points) ?
                 validationResult.Mistakes | PointsMistakes.CrossedShape : validationResult.Mistakes;
 
-            validationResult.ArePointsValid = validationResult.Mistakes == PointsMistakes.Nothing ? true : false;
+            validationResult.ArePointsValid = validationResult.Mistakes == PointsMistakes.Nothing;
             validationResult.Message = $"Passed validation {validationResult.ArePointsValid}; Problems: {validationResult.Mistakes}";
 
             return validationResult;
@@ -31,17 +38,15 @@ namespace SRR.UIP.HW8.LandCalculator.BLL.Services
 
         private bool IsPointsCountMoreThanTwo(List<Point> points)
         {
+            if (points == null)
+            {
+                return false;
+            }
             return points.Count > 2;
         }
 
         private bool IsClosedContour(List<Point> points)
         {
-
-            if (points == null || points.Count <= 2)
-            {
-                return false;
-            }
- 
             int pointsCount = points.Count;
             bool isLastAndFirstPointsConnected =  points[0] == points[pointsCount - 1];
             bool isNotOneLineOfEdges = IsNotOneLineOfEdges(points); 
@@ -69,21 +74,13 @@ namespace SRR.UIP.HW8.LandCalculator.BLL.Services
 
         private int GetNumberOfDublicates(List<Point> points)
         {
-            if (points ==  null || points.Count == 0)
-            {
-                return 0;
-            }
             List<Point> tempPoints = points.GetRange(0, points.Count-1);
-            return tempPoints.GroupBy(i => i).Where(g => g.Count() > 1).Select(g => g.Key).ToArray().Length;
+            return tempPoints.Count - tempPoints.Distinct().ToList().Count;
         }
 
         private bool IsCrossedContour(List<Point> points)
         {
             List<Point> tempPoints = points.Distinct().ToList();
-            if (tempPoints == null || tempPoints.Count <= 2)
-            {
-                return false;
-            }
             int pointsCount = tempPoints.Count;
             Point sectionAPoint1, sectionAPoint2, sectionBPoint1, sectionBPoint2;
             for (int i = 2; i < pointsCount - 1; i++)

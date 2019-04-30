@@ -13,13 +13,13 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
 {
     public class UIConsoleInteractor
     {
-        private ILandCalculator LandAreaCalculator { get; }
+        private ILandCalculator LandAreaCalculator { get; set; }
         private IPointsValidator PointsValidator { get; set; }
 
-        public UIConsoleInteractor(ILandCalculator landAreaCalculator)
+        public UIConsoleInteractor(ILandCalculator landAreaCalculator, IPointsValidator pointsValidator)
         {
-            LandAreaCalculator = landAreaCalculator;
-            this.PointsValidator = new PointsValidator();
+            this.LandAreaCalculator = landAreaCalculator;
+            this.PointsValidator = pointsValidator;
 
         }
 
@@ -28,8 +28,11 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
             List<Point> points = GetPointsTest(3);
             PointsValidationResult validationResult = PointsValidator.GetValidationResult(points);
             Console.WriteLine($"Result validation: {validationResult.Message}; ");
-            long landArea = LandAreaCalculator.CalculateLandArea(points);
-            Console.WriteLine($"Result = {landArea}");
+            if (validationResult.ArePointsValid)
+            {
+                long landArea = LandAreaCalculator.CalculateLandArea(points);
+                Console.WriteLine($"Result = {landArea}");
+            }
         }
 
         private List<Point> GetPointsTest(int choice)
