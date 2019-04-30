@@ -35,7 +35,7 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
             }
         }
 
-        private List<Point> GetPointsTest(int choice)
+        private List<Point> GetPointsTest(int choice = -1)
         {
             List<Point> setOfPoints;
 
@@ -147,22 +147,23 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
 
         }
 
-        static Point GetPoint(int pointNumber)
+        private Point GetPoint(int pointNumber)
         {
             int xCoord;
             int yCoord;
 
             Console.WriteLine($"Enter coordinates of {pointNumber} point");
-            InputCoordinate("X", out xCoord);
-            InputCoordinate("Y", out yCoord);
+            xCoord = GetCoordinateValueFromConsole("X");
+            yCoord = GetCoordinateValueFromConsole("Y");
             StaticInjector.Logger.Info($"Point {pointNumber} created, ({xCoord},{yCoord})");
 
             return new Point(xCoord, yCoord);
         }
 
-        private static void InputCoordinate(string coordinateName, out int coordinate)
+        private int GetCoordinateValueFromConsole(string coordinateName)
         {
             bool isParsedOK = false;
+            int coordinate;
             do
             {
                 Console.Write($"{coordinateName} => ");
@@ -173,6 +174,7 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
                     StaticInjector.Logger.Error($"Not valid value of {coordinateName}");
                 }
             } while (!isParsedOK);
+            return coordinate;
         }
     }
 }
