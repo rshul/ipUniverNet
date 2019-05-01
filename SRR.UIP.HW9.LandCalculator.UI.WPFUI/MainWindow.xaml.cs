@@ -24,5 +24,7 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI
         {
             InitializeComponent();
         }
+
+       
     }
 }

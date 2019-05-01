@@ -4,11 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SRR.UIP.HW9.LandCalculator.UI.WPFUI"
-        xmlns:customcontrols="clr-namespace:SRR.UIP.HW9.LandCalculator.UI.WPFUI.CustomControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel Background="FloralWhite">
-        <customcontrols:PointInput />
-        <customcontrols:PointInput />
+    <StackPanel Background="FloralWhite"  >
+        <local:LandCalculatorUI Padding="0,10"/>
     </StackPanel>
 </Window>

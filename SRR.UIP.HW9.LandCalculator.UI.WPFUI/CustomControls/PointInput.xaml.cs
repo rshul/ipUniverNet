@@ -24,5 +24,29 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI.CustomControls
         {
             InitializeComponent();
         }
+
+        public bool IsParsableToPoint
+        {
+            get
+            {
+                return int.TryParse(this.X.Text, out int _) || int.TryParse(this.Y.Text, out int _);
+            }
+        }
+
+        internal Point GetPoint()
+        {
+            if (this.IsParsableToPoint)
+            {
+                int.TryParse(this.X.Text, out int coordX);
+                int.TryParse(this.Y.Text, out int coordY);
+                return new Point(coordX, coordY);
+            }
+            else
+            {
+                return new Point();
+
+            }
+
+        }
     }
 }
