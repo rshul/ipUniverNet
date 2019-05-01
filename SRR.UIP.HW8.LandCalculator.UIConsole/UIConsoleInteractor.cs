@@ -25,7 +25,7 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
 
         internal void Start()
         {
-            List<Point> points = GetPoints(5);
+            List<Point> points = GetPoints();
             PointsValidationResult validationResult = PointsValidator.GetValidationResult(points);
             Console.WriteLine($"Result validation: {validationResult.Message}; ");
             if (validationResult.ArePointsValid)
@@ -95,20 +95,28 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
             return setOfPoints;
         }
 
-        private List<Point> GetPoints(int PointsNumber)
+        private List<Point> GetPoints()
         {
-            if (PointsNumber <= 0 || PointsNumber > 20)
-            {
-                StaticInjector.Logger.Warn("Number of points must be  0 < x <=20");
-                return null;
-            }
             Point tempPoint;
             List<Point> tempListOfPoints = new List<Point>();
             int pointsCounter = 0;
-            while (pointsCounter < PointsNumber)
+            int pointsNumber;
+            bool isParsedOK;
+            do
+            {
+                Console.Write($"How many points?");
+                string enteredStringNumber = Console.ReadLine();
+                isParsedOK = int.TryParse(enteredStringNumber, out pointsNumber);
+                if (!isParsedOK)
+                {
+                    StaticInjector.Logger.Error($"Not valid value of {pointsNumber}");
+                }
+            } while (!isParsedOK);
+
+            while (pointsCounter < pointsNumber)
             {
                 tempPoint = GetPoint(pointsCounter);
-                if (pointsCounter != PointsNumber - 1)
+                if (pointsCounter != pointsNumber - 1)
                 {
                     bool isInputValid = IsPointValid(tempListOfPoints, tempPoint);
                     if (!isInputValid)
