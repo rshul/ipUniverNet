@@ -25,7 +25,7 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
 
         internal void Start()
         {
-            List<Point> points = GetPointsTest(3);
+            List<Point> points = GetPoints(5);
             PointsValidationResult validationResult = PointsValidator.GetValidationResult(points);
             Console.WriteLine($"Result validation: {validationResult.Message}; ");
             if (validationResult.ArePointsValid)
@@ -134,15 +134,7 @@ namespace SRR.UIP.HW8.LandCalculator.UIConsole
             }
             else
             {
-                foreach (var point in pointsCollection)
-                {
-                    if (takenPoint.Equals(point))
-                    {
-                        StaticInjector.Logger.Warn("Points can not be the same");
-                        return false;
-                    }
-                }
-                return true;
+                return !pointsCollection.Contains(takenPoint); 
             }
 
         }
