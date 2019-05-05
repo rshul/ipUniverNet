@@ -110,6 +110,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SRR.UIP.HW9.LandCalculator.BLL\SRR.UIP.HW9.LandCalculator.BLL.csproj">
+      <Project>{1DAC24D5-CC35-4DC5-95A6-2F45F8A552DB}</Project>
+      <Name>SRR.UIP.HW9.LandCalculator.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SRR.UIP.HW9.LandCalculator.Shared\SRR.UIP.HW9.LandCalculator.Shared.csproj">
+      <Project>{E1630E8F-49B3-40BE-B333-D9654FBAF601}</Project>
+      <Name>SRR.UIP.HW9.LandCalculator.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

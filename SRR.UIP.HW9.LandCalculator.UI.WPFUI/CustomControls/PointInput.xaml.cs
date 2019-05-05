@@ -20,6 +20,7 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI.CustomControls
     /// </summary>
     public partial class PointInput : UserControl
     {
+        public event EventHandler DeletePointInput;
         public PointInput()
         {
             InitializeComponent();
@@ -47,6 +48,15 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI.CustomControls
 
             }
 
+        }
+
+        private void DeleteInputPoint_Click(object sender, RoutedEventArgs e)
+        {
+            if (DeletePointInput == null)
+            {
+                return;
+            }
+            DeletePointInput(this, EventArgs.Empty);
         }
     }
 }

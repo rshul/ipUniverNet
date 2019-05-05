@@ -1,6 +1,9 @@
-﻿using SRR.UIP.HW9.LandCalculator.UI.WPFUI.CustomControls;
+﻿using SRR.UIP.HW9.LandCalculator.BLL.Services;
+using SRR.UIP.HW9.LandCalculator.Shared.Interfaces;
+using SRR.UIP.HW9.LandCalculator.UI.WPFUI.CustomControls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +24,16 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI
     /// </summary>
     public partial class LandCalculatorUI : UserControl
     {
+        public ILandCalculator LandCalculator { get; set; }
+        public IPointsValidator PointsValidator { get; set; }
+
         public LandCalculatorUI()
         {
             InitializeComponent();
+            LandCalculator = new LandAreaCalculator();
+            PointsValidator = new PointsValidator();
         }
+
 
         private void CalculateClick(object sender, RoutedEventArgs e)
         {
@@ -34,6 +43,7 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI
         private void AddPointClick(object sender, RoutedEventArgs e)
         {
             PointInput ptIn = new PointInput();
+            ptIn.DeletePointInput += ( object pi, EventArgs _) => this.PointInputsCollection.Children.Remove((PointInput) pi);
             PointInputsCollection.Children.Add(ptIn);
         }
 
@@ -47,12 +57,12 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI
                 {
                     if (ptIn.IsParsableToPoint)
                     {
-                    points.Add(ptIn.GetPoint());
+                        points.Add(ptIn.GetPoint());
                     }
                     else
                     {
-                            points.Clear();
-                        return points; 
+                        points.Clear();
+                        return points;
                     }
                 }
             }

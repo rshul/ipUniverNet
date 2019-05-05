@@ -17,6 +17,6 @@
         <TextBox MinWidth="50"
                  Padding="10,3"
                  x:Name="Y"/>
-        <Button >Delete</Button>
+        <Button Click="DeleteInputPoint_Click">Delete</Button>
     </StackPanel>
 </UserControl>
