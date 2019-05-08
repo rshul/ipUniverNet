@@ -11,12 +11,19 @@
                Content="X" />
         <TextBox x:Name="X"
                  MinWidth="50"
-                 Padding="10,3"/>
+                 Padding="10,3"
+                 TextChanged="TextChangedInInputPoint"/>
         <Label Margin="5,0"
                Content="Y"/>
         <TextBox MinWidth="50"
                  Padding="10,3"
-                 x:Name="Y"/>
+                 x:Name="Y"
+                 TextChanged="TextChangedInInputPoint"/>
         <Button Click="DeleteInputPoint_Click">Delete</Button>
+        <TextBlock Foreground="Red"
+                   x:Name="ValidationBlock"
+                   VerticalAlignment="Center"
+                   Visibility="Collapsed"
+                   Margin="5,0">hello</TextBlock>
     </StackPanel>
 </UserControl>

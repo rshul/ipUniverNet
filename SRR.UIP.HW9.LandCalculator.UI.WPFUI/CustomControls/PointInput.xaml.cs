@@ -20,6 +20,7 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI.CustomControls
     /// </summary>
     public partial class PointInput : UserControl
     {
+
         public event EventHandler DeletePointInput;
         public PointInput()
         {
@@ -30,7 +31,7 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI.CustomControls
         {
             get
             {
-                return int.TryParse(this.X.Text, out int _) || int.TryParse(this.Y.Text, out int _);
+                return int.TryParse(this.X.Text, out int _) && int.TryParse(this.Y.Text, out int _);
             }
         }
 
@@ -58,5 +59,21 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI.CustomControls
             }
             DeletePointInput(this, EventArgs.Empty);
         }
+
+        private void TextChangedInInputPoint(object sender, TextChangedEventArgs e)
+        {
+            if (!this.IsParsableToPoint)
+            {
+                ValidationBlock.Visibility = Visibility.Visible;
+                ValidationBlock.Text = "X OR Y value is not valid";
+            }
+            else
+            {
+                ValidationBlock.Visibility = Visibility.Collapsed;
+                ValidationBlock.Text = "";
+            }
+        }
+
+        
     }
 }

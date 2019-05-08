@@ -1,6 +1,7 @@
 ﻿using SRR.UIP.HW9.LandCalculator.BLL.Services;
 using SRR.UIP.HW9.LandCalculator.Shared.Interfaces;
 using SRR.UIP.HW9.LandCalculator.Shared.Models;
+using SRR.UIP.HW9.LandCalculator.Shared.Services;
 using SRR.UIP.HW9.LandCalculator.UI.WPFUI.CustomControls;
 using System;
 using System.Collections.Generic;
@@ -27,17 +28,21 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI
     {
         public ILandCalculator LandCalculator { get; set; }
         public IPointsValidator PointsValidator { get; set; }
+        public ILogger Logger { get; set; }
 
         public LandCalculatorUI()
         {
             InitializeComponent();
             LandCalculator = new LandAreaCalculator();
             PointsValidator = new PointsValidator();
+            Logger = new Logger();
+
         }
 
 
         private void CalculateClick(object sender, RoutedEventArgs e)
         {
+            Logger.Fatal($"[{this.GetType().Name}]: CalculateClick");
             long result = CalculateArea(GetPoints());
             if (result != -1)
             {
