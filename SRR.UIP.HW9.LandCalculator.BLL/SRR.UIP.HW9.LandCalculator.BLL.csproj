@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LandAreaCalculator.cs" />
     <Compile Include="Services\PointsValidator.cs" />
+    <Compile Include="Services\UIConsoleInteractor.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

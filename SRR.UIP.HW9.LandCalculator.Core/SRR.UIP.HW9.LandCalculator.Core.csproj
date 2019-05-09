@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E1630E8F-49B3-40BE-B333-D9654FBAF601}</ProjectGuid>
+    <ProjectGuid>{11770FEC-74F2-4F90-AE59-44F3969D9797}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SRR.UIP.HW9.LandCalculator.Shared</RootNamespace>
-    <AssemblyName>SRR.UIP.HW9.LandCalculator.Shared</AssemblyName>
+    <RootNamespace>SRR.UIP.HW9.LandCalculator.Core</RootNamespace>
+    <AssemblyName>SRR.UIP.HW9.LandCalculator.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,28 +31,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ILandCalculator.cs" />
-    <Compile Include="Interfaces\ILoggercs.cs" />
-    <Compile Include="Interfaces\ILogStorage.cs" />
-    <Compile Include="Interfaces\IPointsValidator.cs" />
-    <Compile Include="Interfaces\IUIConsoleInteractor.cs" />
-    <Compile Include="Models\PointsValidationResult.cs" />
+    <Compile Include="DI\AppContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Logger.cs" />
-    <Compile Include="StaticInjector.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SRR.UIP.HW9.LandCalculator.BLL\SRR.UIP.HW9.LandCalculator.BLL.csproj">
+      <Project>{1DAC24D5-CC35-4DC5-95A6-2F45F8A552DB}</Project>
+      <Name>SRR.UIP.HW9.LandCalculator.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SRR.UIP.HW9.LandCalculator.DAL\SRR.UIP.HW9.LandCalculator.DAL.csproj">
+      <Project>{68230DB5-B572-4CF3-A2CC-0DBA2D6EDE47}</Project>
+      <Name>SRR.UIP.HW9.LandCalculator.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SRR.UIP.HW9.LandCalculator.Shared\SRR.UIP.HW9.LandCalculator.Shared.csproj">
+      <Project>{E1630E8F-49B3-40BE-B333-D9654FBAF601}</Project>
+      <Name>SRR.UIP.HW9.LandCalculator.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

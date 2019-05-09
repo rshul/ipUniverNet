@@ -42,9 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storages\ConsoleLogStorage.cs" />
+    <Compile Include="Storages\FileLogStorage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Storages\" />
+    <ProjectReference Include="..\SRR.UIP.HW9.LandCalculator.Shared\SRR.UIP.HW9.LandCalculator.Shared.csproj">
+      <Project>{E1630E8F-49B3-40BE-B333-D9654FBAF601}</Project>
+      <Name>SRR.UIP.HW9.LandCalculator.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
