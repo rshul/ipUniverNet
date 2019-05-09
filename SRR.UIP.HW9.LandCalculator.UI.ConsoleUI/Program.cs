@@ -13,8 +13,9 @@ namespace SRR.UIP.HW9.LandCalculator.UI.ConsoleUI
     {
         static void Main(string[] args)
         {
+            StaticInjector.Logger = AppContainer.Resolve<ILogger>();
             var storages = AppContainer.Resolve<IEnumerable<ILogStorage>>();
-            InitializeStorages(storages);
+            StaticInjector.InitializeStorages(storages);
 
             IUIConsoleInteractor appUI = AppContainer.Resolve<IUIConsoleInteractor>();
             appUI.Start();
@@ -22,12 +23,6 @@ namespace SRR.UIP.HW9.LandCalculator.UI.ConsoleUI
             Console.ReadLine();
         }
 
-        private static void InitializeStorages(IEnumerable<ILogStorage> storageCollection)
-        {
-            foreach (var storage in storageCollection)
-            {
-                StaticInjector.Logger.LogStorages.Add(storage);
-            }
-        }
+        
     }
 }

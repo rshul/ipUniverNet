@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SRR.UIP.HW9.LandCalculator.Core.DI;
+using SRR.UIP.HW9.LandCalculator.Shared;
+using SRR.UIP.HW9.LandCalculator.Shared.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +25,11 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI
     {
         public MainWindow()
         {
+            StaticInjector.Logger = AppContainer.Resolve<ILogger>();
+            var storages = AppContainer.Resolve<IEnumerable<ILogStorage>>();
+            StaticInjector.InitializeStorages(storages);
             InitializeComponent();
+            
         }
 
        

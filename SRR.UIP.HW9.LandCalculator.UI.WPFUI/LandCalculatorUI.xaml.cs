@@ -1,4 +1,6 @@
 ﻿using SRR.UIP.HW9.LandCalculator.BLL.Services;
+using SRR.UIP.HW9.LandCalculator.Core.DI;
+using SRR.UIP.HW9.LandCalculator.Shared;
 using SRR.UIP.HW9.LandCalculator.Shared.Interfaces;
 using SRR.UIP.HW9.LandCalculator.Shared.Models;
 using SRR.UIP.HW9.LandCalculator.Shared.Services;
@@ -32,10 +34,10 @@ namespace SRR.UIP.HW9.LandCalculator.UI.WPFUI
 
         public LandCalculatorUI()
         {
+            LandCalculator = AppContainer.Resolve<ILandCalculator>();
+            PointsValidator = AppContainer.Resolve<IPointsValidator>();
+            Logger = StaticInjector.Logger;
             InitializeComponent();
-            LandCalculator = new LandAreaCalculator();
-            PointsValidator = new PointsValidator();
-            Logger = new Logger();
 
         }
 
